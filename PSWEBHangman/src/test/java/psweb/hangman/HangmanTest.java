@@ -5,6 +5,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import psweb.hangman.model.Hangman;
+
 public class HangmanTest 
 {
 	@Test

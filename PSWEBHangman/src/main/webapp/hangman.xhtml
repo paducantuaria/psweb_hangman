@@ -13,7 +13,7 @@
 		<h:body>
 			<h:form id="form">
 				<h1>The PSWEB Hangman</h1>
-				<hr/>	
+				<p:separator/>
 				<h2>Word: <h:outputText value="#{hangmanBean.word}" /></h2>
 				<br/>
 				<h2>Chances: <h:outputText value="#{hangmanBean.chances}" /></h2>
@@ -26,11 +26,11 @@
 									<p:ajax event="keyup" update="form" />
 							   </p:inputText>
 				<p:commandButton value="Guess" 
-				                 actionListener="#{hangmanBean.guess()}"
+				                 actionListener="#{hangmanBean.guess}"
 				                 disabled="#{empty hangmanBean.letter or hangmanBean.gameOver}"
 				                 update="form"/>
 				<p:commandButton value="Reset" 
-				                 actionListener="#{hangmanBean.reset()}"
+				                 actionListener="#{hangmanBean.reset}"
 				                 update="form"/>		
 				
 				<ui:fragment rendered="#{hangmanBean.gameOver}">

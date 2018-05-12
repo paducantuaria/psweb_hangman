@@ -2,6 +2,8 @@ package psweb.hangman;
 
 import java.util.Scanner;
 
+import psweb.hangman.model.Hangman;
+
 public class Game 
 {
 	private static Scanner sc = new Scanner(System.in);

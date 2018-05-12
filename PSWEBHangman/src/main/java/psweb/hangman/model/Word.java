@@ -1,4 +1,4 @@
-package psweb.hangman;
+package psweb.hangman.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
