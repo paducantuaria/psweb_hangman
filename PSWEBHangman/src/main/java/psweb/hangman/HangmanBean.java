@@ -1,5 +1,7 @@
 package psweb.hangman;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -60,7 +62,9 @@ public class HangmanBean extends _Bean {
 	}
 
 	public String getAttempts() {
-		return hangman.getInputHistory().toString();
+		List<Character> history = hangman.getInputHistory();
+		history.sort(null);
+		return history.toString();
 	}
 
 	public boolean isGameOver() {
