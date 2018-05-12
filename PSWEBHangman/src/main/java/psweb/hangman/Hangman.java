@@ -57,7 +57,7 @@ public class Hangman {
 	 * Faz o input de um caractere
 	 * 
 	 * @param chr caractere a ser inserido
-	 * @return método input de Word em currentWord
+	 * @return método input de Word em currentWord 
 	 */
 	public boolean input(Character chr) {
 		boolean match = currentWord.input(chr);
