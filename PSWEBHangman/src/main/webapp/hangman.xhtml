@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:view contentType="text/html">
+		<h:head>						
+			<script src="js/geral.js"></script>	
+		</h:head>
+	
+		<h:body>
+			<h:form id="form">
+				<h1>The PSWEB Hangman</h1>
+				<hr/>	
+				<h2>Word: <h:outputText value="#{hangmanBean.word}" /></h2>
+				<br/>
+				<h2>Chances: <h:outputText value="#{hangmanBean.chances}" /></h2>
+				<br/>
+				<h2>Attempts: <h:outputText value="#{hangmanBean.attempts}" /></h2>
+				<br/>								
+				Pick a Letter: <p:inputText value="#{hangmanBean.letter}" 
+				                            maxlength="1"
+				                            readonly="#{hangmanBean.gameOver}">
+									<p:ajax event="keyup" update="form" />
+							   </p:inputText>
+				<p:commandButton value="Guess" 
+				                 actionListener="#{hangmanBean.guess()}"
+				                 disabled="#{empty hangmanBean.letter or hangmanBean.gameOver}"
+				                 update="form"/>
+				<p:commandButton value="Reset" 
+				                 actionListener="#{hangmanBean.reset()}"
+				                 update="form"/>		
+				
+				<ui:fragment rendered="#{hangmanBean.gameOver}">
+					<hr/> 
+					<h1>				
+						<h:outputText value="Congratulations, you guessed!" 
+									  rendered="#{hangmanBean.gameWin}"/>
+						<h:outputText value="You are dead, hanged dead..."  
+						              rendered="#{hangmanBean.gameLose}"/>
+					</h1>
+				</ui:fragment>					
+			</h:form>
+		</h:body>
+	</f:view>
+</html>

@@ -1,0 +1,54 @@
+div.main
+{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 40px;
+	margin-right: 40px;
+	min-height: 400px;	
+}
+
+div.disponibilidadeTabView
+{
+	margin-top: 10px;	
+}
+
+div.alocacaoTabView
+{
+	margin-top: 10px;	
+}
+
+div.alocarProfessorTabView
+{
+	margin-top: 5px;	
+}
+
+/* Formulários */
+table
+{
+	font-size: 12px;
+}
+
+/* Header dos DataTables */
+table.datatable-header
+{
+	font-size: 9.5px;
+	text-align: left;
+	font-weight: bold;
+}
+
+/* Conteúdo dos DataTables */
+tbody.ui-datatable-data
+{
+	font-size: 11px;
+}
+
+tbody.ui-datatable-data
+{
+	font-size: 11px;
+}
+
+/* Menus do Usuário */
+span.wijmo-wijmenu-text
+{
+	font-size: 11.5px;
+}
