@@ -1,4 +1,4 @@
-package psweb.hangman;
+package psweb.hangman.control;
 
 import java.util.Locale;
 
