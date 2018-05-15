@@ -3,28 +3,19 @@ package psweb.hangman.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
 /**
  * Classe base do Jogo
  * 
  * @author Professor Rafael Castaneda
  * @since 1.0
  */
-@Entity
+
 public class Hangman {
 	
-	@Id
-	@GeneratedValue
-	private Long id;
 	
 	private int chances = 6;
 	private List<Character> history;
-	
-	@ManyToOne
+		
 	private Word currentWord;
 
 	public Hangman() {
@@ -37,9 +28,10 @@ public class Hangman {
 	 * @since 1.0	 * 
 	 */
 	public void reset() {
-		reset("Hello"); // TODO - Buscar de um dicionario
+		reset("Hello"); // TODO - Buscar de um dicionario acrescentar parâmetro de dificuldade no construtor
 
 	}
+	
 	
 	/**
 	 * Reinicia o jogo com uma palavra escolhida

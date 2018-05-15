@@ -16,9 +16,9 @@
 			<p:separator />
 			<h2> <h:outputText value="Escolha a forma de jogo" /> </h2>
 
-			<p:selectOneButton value="#{inicioView.tipo}">
-				<f:selectItem itemLabel="onePlayer" itemValue="ONEPLAYER" />
-				<f:selectItem itemLabel="twoPlayer" itemValue="TWOPLAYER" />
+			<p:selectOneButton value="#{inicioBean.tipo}">
+				<f:selectItem itemLabel="Forever Alone" itemValue="inicioBean.ONEPLAYER" />
+				<f:selectItem itemLabel="Against an Enemy" itemValue="inicioBean.TWOPLAYER" />
 			</p:selectOneButton>
 
 			<p:commandButton value="Submit" update="form" icon="ui-icon-check" />

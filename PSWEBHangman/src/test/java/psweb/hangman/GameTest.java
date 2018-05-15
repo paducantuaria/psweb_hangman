@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import psweb.hangman.model.Hangman;
 
-public class Game 
+public class GameTest 
 {
 	private static Scanner sc = new Scanner(System.in);
 	

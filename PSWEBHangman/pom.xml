@@ -156,6 +156,8 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.2.11.Final</version>
 		</dependency>
+		
+		<!-- Lib para pool de conexões -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-dbcp2</artifactId>
