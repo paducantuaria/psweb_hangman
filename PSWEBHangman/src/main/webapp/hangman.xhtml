@@ -8,41 +8,102 @@
 	<f:view contentType="text/html">
 		<h:head>						
 			<script src="js/geral.js"></script>	
+			<link rel="stylesheet" type="text/css" href="themes/in-game.css"></link>
 		</h:head>
-	
 		<h:body>
-			<h:form id="form">
-				<h1>The PSWEB Hangman</h1>
-				<p:separator/>
-				<h2>Word: <h:outputText value="#{hangmanBean.word}" /></h2>
-				<br/>
-				<h2>Chances: <h:outputText value="#{hangmanBean.chances}" /></h2>
-				<br/>
-				<h2>Attempts: <h:outputText value="#{hangmanBean.attempts}" /></h2>
-				<br/>								
-				Pick a Letter: <p:inputText value="#{hangmanBean.letter}" 
-				                            maxlength="1"
-				                            readonly="#{hangmanBean.gameOver}">
-									<p:ajax event="keyup" update="form" />
-							   </p:inputText>
-				<p:commandButton value="Guess" 
-				                 actionListener="#{hangmanBean.guess}"
-				                 disabled="#{empty hangmanBean.letter or hangmanBean.gameOver}"
-				                 update="form"/>
-				<p:commandButton value="Reset" 
-				                 actionListener="#{hangmanBean.reset}"
-				                 update="form"/>		
+		<h:form id="form">
+			<div class="ui-fluid">
 				
-				<ui:fragment rendered="#{hangmanBean.gameOver}">
-					<hr/> 
-					<h1>				
-						<h:outputText value="Congratulations, you guessed!" 
-									  rendered="#{hangmanBean.gameWin}"/>
-						<h:outputText value="You are dead, hanged dead..."  
-						              rendered="#{hangmanBean.gameLose}"/>
-					</h1>
-				</ui:fragment>					
-			</h:form>
-		</h:body>
+				<div class="information ui-g">
+					<div class="player ui-g-4">
+						<span>player 1</span>
+					</div>
+					<div class="clock ui-g-4">
+						<span>Clock</span>
+					</div>
+					<div class="player ui-g-4">
+						<span>player 2</span>
+					</div>					
+				</div>
+				
+				<div class="maybe-iteration ui-g">
+					<div class="side ui-g-6">
+						
+						<div class="menu ui-g-12">
+							
+							<div class=" ui-md-12 ui-g-4">
+								<h:graphicImage styleClass="menu-item" 
+   									value="images/app/back.jpg"/> 
+							</div>
+							<div class=" ui-md-12 ui-g-4">
+								<h:graphicImage styleClass="menu-item" 
+   									value="images/app/sound.jpg"/> 
+							</div>
+							<div class=" ui-md-12 ui-g-4">
+								<h:graphicImage styleClass="menu-item" 
+   									value="images/app/hint.jpg"/> 
+							</div>
+							
+						</div>
+						
+						<div class="rank ui-g-12">
+							<span>Top 5</span>
+						</div>
+						<div class="hint ui-g-12">
+							<span>Dica</span>
+						</div>
+					</div>
+				
+					<div class="side ui-g-6">
+						<div class="ui-g-12">
+							<h:graphicImage styleClass="hangman"
+   									value="images/app/hangman.jpg"/> 
+						</div>
+						<div class="ui-g-12">
+							<h5>Chances: <h:outputText value="#{hangmanBean.chances}" /></h5>
+							
+							<h5>Attempts: <h:outputText value="#{hangmanBean.attempts}" /></h5>
+							
+						</div>
+					</div>		
+				</div>
+				
+				<div class="hidden-word ui-g">
+					<span>Palavras escondidas</span>
+				</div>
+					
+				<div class="keyboard ui-g">
+						<div class="ui-g-12">
+							Pick a Letter:<p:inputText value="#{hangmanBean.letter}" 
+			                            maxlength="1"
+			                            readonly="#{hangmanBean.gameOver}">
+								<p:ajax event="keyup" update="form" />
+						    </p:inputText>
+						
+						</div>
+						
+						<div class="ui-g-8">
+							<p:commandButton  
+											value="Guess" 
+							                 actionListener="#{hangmanBean.guess}"
+							                 disabled="#{empty hangmanBean.letter or hangmanBean.gameOver}"
+							                 update="form"/>
+		                 </div>
+		                 
+		                 <div class="ui-g-4">
+							<p:commandButton 
+											 value="Reset" 
+							                 actionListener="#{hangmanBean.reset}"
+							                 update="form"/>
+		                
+		                 </div>
+						                 
+<!-- 						<div class="ui-g-12">linha 1 teclado</div> -->
+<!-- 						<div class="ui-g-12">linha 2 teclado</div> -->
+<!-- 						<div class="ui-g-12">linha 3 teclado</div> -->
+				</div>
+			</div>
+		</h:form>
+	</h:body>
 	</f:view>
 </html>

@@ -41,10 +41,10 @@ public class HangmanBean extends _Bean {
 	// Construtor
 	//
 	public HangmanBean() {
-		if (config.getTipo().equals(Tipo.ONEPLAYER)) {
+		//if (config.getTipo().equals(Tipo.ONEPLAYER)) {
 			this.hangman = new Hangman();
 			this.hangman.reset();
-		}
+		//}
 	}
 
 	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador
