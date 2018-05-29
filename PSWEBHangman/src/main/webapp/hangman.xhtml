@@ -9,24 +9,41 @@
 		<h:head>						
 			<script src="js/geral.js"></script>	
 			<link rel="stylesheet" type="text/css" href="themes/in-game.css"></link>
+			<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"></link>
 		</h:head>
 		<h:body>
 		<h:form id="form">
 			<div class="ui-fluid">
 				
-				<div class="information ui-g">
+				<div class="top basic-style center-align ui-g">
+					<div class="gametitle ui-g-12">
+						<span>HANGMAN</span>
+					</div>
+				</div>
+				
+				<div class="information basic-style center-align ui-g">
 					<div class="player ui-g-4">
-						<span>player 1</span>
+						<div class="playername ui-md-6 ui-g-12">
+							<span>Player 1</span>
+						</div>
+						<div class="playerscore ui-md-6 ui-g-12">
+							<span>6</span>
+						</div>
 					</div>
 					<div class="clock ui-g-4">
 						<span>Clock</span>
 					</div>
 					<div class="player ui-g-4">
-						<span>player 2</span>
+						<div class="playername ui-md-6 ui-g-12">
+							<span>Player 2</span>
+						</div>
+						<div class="playerscore ui-md-6 ui-g-12">
+							<span>2</span>
+						</div>
 					</div>					
 				</div>
 				
-				<div class="maybe-iteration ui-g">
+				<div class="maybe-iteration basic-style ui-g">
 					<div class="side ui-g-6">
 						
 						<div class="menu ui-g-12">
@@ -60,19 +77,21 @@
    									value="images/app/hangman.jpg"/> 
 						</div>
 						<div class="ui-g-12">
-							<h5>Chances: <h:outputText value="#{hangmanBean.chances}" /></h5>
+							<span>Chances: <h:outputText value="#{hangmanBean.chances}" /></span>
 							
-							<h5>Attempts: <h:outputText value="#{hangmanBean.attempts}" /></h5>
+						</div>
+						<div class="ui-g-12">
+							<span>Attempts: <h:outputText value="#{hangmanBean.attempts}" /></span>
 							
 						</div>
 					</div>		
 				</div>
 				
-				<div class="hidden-word ui-g">
+				<div class="hidden-word basic-style ui-g">
 					<span>Palavras escondidas</span>
 				</div>
 					
-				<div class="keyboard ui-g">
+				<div class="keyboard basic-style center-align ui-g">
 						<div class="ui-g-12">
 							Pick a Letter:<p:inputText value="#{hangmanBean.letter}" 
 			                            maxlength="1"
