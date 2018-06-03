@@ -1,5 +1,6 @@
 body {
 	background-color: #c11415;
+	font-weight: bold;
 }
 
 .basic-style {
@@ -12,14 +13,22 @@ body {
 	text-align: center;
 }
 
+.right-align {
+	text-align: right;
+}
+
+.half-width {
+	width: 50% !important;
+}
+
 .menu-item {
 	height: 30px;
 	width: 30px;
 }
 
 .hangman {
-	height: 400px;
-	width: 300px;
+	height: 200px;
+	width: 200px;
 }
 
 .gametitle {
@@ -35,9 +44,32 @@ body {
 	font-size: 30px;
 }
 
+.iterationButton {
+	background: white;
+	border-radius: 5px;
+	border: white;
+	max-width: 25px;
+}
+
+.rank {
+	display: block;
+}
+
+.hidden-word {
+	font-size: 200%;
+}
+
+.ui-g-12 {
+	padding: .2em;
+}
+
 @media only screen and (max-width: 600px) {
     .hangman {
-        height: 200px;
+        height: 150px;
 		width: 150px;
+    }
+    
+    .rank {
+    	display: none;
     }
 }    
