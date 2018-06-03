@@ -19,6 +19,7 @@ public class Word {
 
 	private char[] wordChars;
 	private char[] wordMask;
+	private String wordHint;
 	
 	/**
 	 * Construtor sem argumentos para ser usado pela JPA
@@ -34,6 +35,16 @@ public class Word {
 
 		for (int i = 0; i < wordMask.length; i++)
 			wordMask[i] = '_';
+	}
+	
+	public Word(String word, String hint) {
+		this.wordChars = word.toUpperCase().toCharArray();
+		this.wordMask = new char[wordChars.length];
+
+		for (int i = 0; i < wordMask.length; i++)
+			wordMask[i] = '_';
+		
+		this.wordHint = hint;
 	}
 
 	/**
@@ -94,4 +105,15 @@ public class Word {
 	public String getAnswerAsString() {
 		return new String(wordChars);
 	}
+
+	public String getWordHint() {
+		return wordHint;
+	}
+
+	public void setWordHint(String wordHint) {
+		this.wordHint = wordHint;
+	}
+	
+	
+
 }
