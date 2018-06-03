@@ -3,9 +3,20 @@
  */
 
 function toggleSound(isSoundPlaying){
-	isSoundPlaying ? alert('desliga som') : alert('liga som');
+	isSoundPlaying ? pause() : play() ;
+}
+
+function play(){
+    audio.play();
+}
+
+function pause(){
+    audio.pause();
 }
 
 $('document').ready(function(){
 	
+	audio = document.getElementById('audio');
+    
 });
+

@@ -14,6 +14,10 @@
 			<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"></link>
 		</h:head>
 		<h:body>
+		<audio id="audio" autoplay="true" loop="true">
+			<source src="sounds/music.ogg" type="audio/ogg" />
+		    <source src="sounds/music.mp3" type="audio/mpeg" />
+		</audio>
 		<h:form id="form">
 			<div class="ui-fluid">
 				
@@ -68,7 +72,7 @@
 									<div class=" ui-md-3 ui-g-12">
 										<p:commandButton
 													 title="Reset"
-													 icon="	ui-icon-arrowrefresh-1-w"
+													 icon="ui-icon-arrowrefresh-1-w"
 													 styleClass="iterationButton" 
 									                 actionListener="#{hangmanBean.reset}"
 									                 update="form"/>
@@ -76,7 +80,7 @@
 									<div class=" ui-md-3 ui-g-12">
 										<p:commandButton
 													 title="Music"
-													 icon="	ui-icon-volume-on"
+													 icon="#{hangmanBean.soundPlaying ? 'ui-icon-volume-on' : 'ui-icon-volume-off'}"
 													 styleClass="iterationButton" 
 									                 actionListener="#{hangmanBean.toggleSound}"
 									                 oncomplete="toggleSound(#{hangmanBean.soundPlaying})"
