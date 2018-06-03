@@ -28,6 +28,8 @@ public class HangmanBean extends _Bean {
 	//
 	private Hangman hangman;
 	private Player currentPlayer;
+	private String currentHint;
+	private boolean isSoundPlaying;
 
 	@Autowired
 	private ConfigBean config; // TODO ver com Castaneda se precisa de Get/Set
@@ -36,6 +38,7 @@ public class HangmanBean extends _Bean {
 	// Campos do Formulário
 	//
 	private String letter = "";
+	private String hint = "";
 
 	//
 	// Construtor
@@ -44,6 +47,9 @@ public class HangmanBean extends _Bean {
 		//if (config.getTipo().equals(Tipo.ONEPLAYER)) {
 			this.hangman = new Hangman();
 			this.hangman.reset();
+			this.currentHint = "";
+			// TODO transferir atributo isSoundPlaying para ConfigBean?
+			this.isSoundPlaying = true;
 		//}
 	}
 
@@ -60,12 +66,30 @@ public class HangmanBean extends _Bean {
 		char chr = letter.toCharArray()[0];
 		hangman.input(chr);
 		letter = "";
+		if(currentHint != hangman.getTrueHint()) {
+			hint = "";
+		}
 	}
 
 	public void reset() {
 		hangman.reset();
 		letter = "";
+		hint = "";
+		currentHint = "";
 		// TODO Setar novo jogador corrente, persistir score do jogador
+	}
+	
+	public void showHint() {
+		currentHint = hangman.getHint();
+		hint = currentHint == hangman.getTrueHint() ? "Hint: " + currentHint : "No Hint: " + currentHint;
+	}
+	
+	public void throwBack() {
+	}
+	
+	public boolean toggleSound() {
+		isSoundPlaying = this.isSoundPlaying ? false : true;
+		return isSoundPlaying;
 	}
 
 	//
@@ -120,4 +144,21 @@ public class HangmanBean extends _Bean {
 	public void setCurrentPlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
 	}
+
+	public String getHint() {
+		return this.hint;
+	}
+
+	public void setHint(String hint) {
+		this.hint = hint;
+	}
+	
+	public boolean isHintDisplayed() {
+		return this.currentHint.equals(hangman.getTrueHint()) ? true : false;
+	}
+
+	public boolean isSoundPlaying() {
+		return isSoundPlaying;
+	}
+	
 }
