@@ -91,24 +91,9 @@ public class HangmanBean extends _Bean {
 		letter = "";
 		hint = "";
 		currentHint = "";
-		// TODO Setar novo jogador corrente, persistir score do jogador
+		// TODO Setar novo jogador corrente, persistir score do jogador		
 		
-		
-	}
-	
-	public void showHint() {
-		currentHint = hangman.getHint();
-		hint = currentHint == hangman.getTrueHint() ? "Hint: " + currentHint : "No Hint: " + currentHint;
-	}
-	
-	public void throwHome() {
-		this.isSoundPlaying = false;
-	}
-	
-	public boolean toggleSound() {
-		isSoundPlaying = this.isSoundPlaying ? false : true;
-		return isSoundPlaying;
-	}
+	}	
 
 	public void showHint() {
 		currentHint = hangman.getHint();
