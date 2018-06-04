@@ -11,7 +11,7 @@ public class GameTest
 	public static void main(String[] args)
 	{
 		Hangman hangman = new Hangman();
-		hangman.reset("sbrubbles");
+		hangman.reset("sbrubbles","");
 		
 		while (hangman.getChances()>0 && !hangman.isComplete())
 		{
