@@ -29,15 +29,16 @@
 				
 				<div class="middle basic-style ui-g">
 					<div class="game ui-md-10 ui-g-12">
-						<div class="information basic-style center-align ui-g">
+						<div class="information basic-style center-align ui-g">							
 							<div class="player ui-g-4">
 								<div class="playername ui-md-6 ui-g-12">
 									<span><h:outputText value="#{configBean.player1.name}" /></span>
 								</div>
 								<div class="playerscore ui-md-6 ui-g-12">
-									<span>6</span>
+									<span><h:outputText value="#{configBean.player1.currentScore}" /></span>
 								</div>
 							</div>
+							
 							<div class="panic ui-g-4">
 								<div class="clock ui-md-6 ui-g-12">
 									<span>Clock</span>
@@ -46,15 +47,16 @@
 									<span>Chances: <h:outputText value="#{hangmanBean.chances}" /></span>
 								</div>
 							</div>
-							<ui:fragment rendered="#{configBean.twoPlayers}">
+							<ui:fragment rendered="#{configBean.twoPlayers}">								
 								<div class="player ui-g-4">
 									<div class="playername ui-md-6 ui-g-12">
 										<span><h:outputText value="#{configBean.player2.name}" /></span>
 									</div>
 									<div class="playerscore ui-md-6 ui-g-12">
-										<span>2</span>
+										<span><h:outputText value="#{configBean.player2.currentScore}" /></span>
 									</div>
 								</div>
+								
 							</ui:fragment>
 												
 						</div>

@@ -1,9 +1,13 @@
 package psweb.hangman.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+
+import psweb.hangman.control.Dificuldade;
 
 /**
  * Classe da palavra que será usada no jogo
@@ -22,15 +26,16 @@ public class Word {
 	private char[] wordChars;
 	@Transient
 	private char[] wordMask;
-	private String wordHint;
-	
+
 	private String wordHint;
 	private String wordTxt;
 	
-	
-	 
+	@Enumerated(EnumType.STRING)
+	private Dificuldade dificuldade;
+
 	/**
 	 * Construtor sem argumentos para ser usado pela JPA
+	 * 
 	 * @deprecated para indicar que não será usado na aplicação
 	 */
 	@Deprecated
@@ -44,14 +49,14 @@ public class Word {
 		for (int i = 0; i < wordMask.length; i++)
 			wordMask[i] = '_';
 	}
-	
+
 	public Word(String word, String hint) {
 		this.wordChars = word.toUpperCase().toCharArray();
 		this.wordMask = new char[wordChars.length];
 
 		for (int i = 0; i < wordMask.length; i++)
 			wordMask[i] = '_';
-		
+
 		this.wordHint = hint;
 	}
 
@@ -125,8 +130,42 @@ public class Word {
 	public String getWordTxt() {
 		return wordTxt;
 	}
+
 	public void setWordTxt(String wordTxt) {
 		this.wordTxt = wordTxt;
+	}
+  
+	public Dificuldade getDificuldade() {
+		return dificuldade;
+	}
+
+	public void setDificuldade(Dificuldade dificuldade) {
+		this.dificuldade = dificuldade;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Word other = (Word) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

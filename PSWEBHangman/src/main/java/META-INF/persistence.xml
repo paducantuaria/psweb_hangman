@@ -11,6 +11,8 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<property name="javax.persistence.jdbc.user" value="postgres"/>
 	<property name="javax.persistence.jdbc.password" value="postgres"/>
 	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+	
+	<!-- caso a aplicação não funcione, mude o valor para "create" para criar as tabelas, depois mudar para update -->
 	<property name="hibernate.hbm2ddl.auto" value="update"/>
 	
 	<property name="hibernate.show_sql" value="true" />
