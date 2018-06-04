@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<script src="js/geral.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="themes/config-game.css"></link>
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"></link>
+	</h:head>
+
+	<h:body>
+		<h:form id="form">
+			<div class="ui-fluid">
+				<div class="top-config basic-style center-align ui-g">
+					<div class="ui-g-12">
+						<h:graphicImage styleClass="image-game"
+	   									value="images/app/image_game.jpg"/>
+					</div>
+				</div>
+				
+				<div class="label-name-player-config basic-style center-align ui-g">
+					<div class="ui-g-12">
+						<span><h:outputText value="Player 1 NAME" /></span>
+					</div>
+				</div>
+				<div class="field-name-player-config basic-style center-align ui-g">
+					<div class="ui-g-12">
+						<p:inputText 
+									value="#{configBean.player1.name}" 
+        	                  		maxlength="10"
+        	                  		styleClass="input-config" />
+					</div>
+				</div>
+				
+				<ui:fragment rendered="#{configBean.twoPlayers}">
+					<div class="label-name-player-config basic-style center-align ui-g">
+						<div class="ui-g-12">
+							<span><h:outputText value="Player 2 NAME" /></span>
+						</div>
+					</div>
+					<div class="field-name-player-config basic-style center-align ui-g">
+						<div class="ui-g-12">
+							<p:inputText 
+										value="#{configBean.player2.name}" 
+	        	                  		maxlength="10"
+	        	                  		styleClass="input-config" />
+						</div>
+					</div>
+				</ui:fragment>
+				
+				<div class="navigation basic-style ui-g">
+					<div class="ui-g-4">
+						<p:commandButton action="index"
+										 ajax="false"
+					        			 value="Previous"
+					        			 styleClass="btn-config" />
+					</div>
+					<div class="ui-g-4">
+					</div>
+					
+					<div class="ui-g-4 right-align">
+						<ui:fragment rendered="#{configBean.twoPlayers}">
+							<p:commandButton 
+											 action="hangman"
+											 ajax="false"
+						        			 value="Next"
+						        			 styleClass="btn-config" />
+						</ui:fragment>
+						<ui:fragment rendered="#{!(configBean.twoPlayers)}">
+							<p:commandButton 
+											 action="difficulty"
+											 ajax="false"
+						        			 value="Next"
+						        			 styleClass="btn-config" />
+						</ui:fragment>
+					</div>
+					
+<!-- 					<div class="ui-g-4 right-align"> -->
+<!-- 						<p:commandButton  -->
+<!-- 										 action="#{configBean.twoPlayers ? 'hangman' : 'difficulty'}" -->
+<!-- 										 ajax="false" -->
+<!-- 					        			 value="Next" -->
+<!-- 					        			 styleClass="btn-config" /> -->
+<!-- 					</div> -->
+
+				</div>
+			</div>
+		</h:form>
+	</h:body>
+
+</f:view>
+<body>
+
+</body>
+</html>

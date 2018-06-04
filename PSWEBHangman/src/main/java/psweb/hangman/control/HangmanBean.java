@@ -48,7 +48,6 @@ public class HangmanBean extends _Bean {
 			this.hangman = new Hangman();
 			this.hangman.reset();
 			this.currentHint = "";
-			// TODO transferir atributo isSoundPlaying para ConfigBean?
 			this.isSoundPlaying = true;
 		//}
 	}
@@ -84,7 +83,8 @@ public class HangmanBean extends _Bean {
 		hint = currentHint == hangman.getTrueHint() ? "Hint: " + currentHint : "No Hint: " + currentHint;
 	}
 	
-	public void throwBack() {
+	public void throwHome() {
+		this.isSoundPlaying = false;
 	}
 	
 	public boolean toggleSound() {
@@ -160,5 +160,4 @@ public class HangmanBean extends _Bean {
 	public boolean isSoundPlaying() {
 		return isSoundPlaying;
 	}
-	
 }

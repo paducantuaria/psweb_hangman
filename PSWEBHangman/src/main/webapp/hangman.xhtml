@@ -32,7 +32,7 @@
 						<div class="information basic-style center-align ui-g">
 							<div class="player ui-g-4">
 								<div class="playername ui-md-6 ui-g-12">
-									<span>Player 1</span>
+									<span><h:outputText value="#{configBean.player1.name}" /></span>
 								</div>
 								<div class="playerscore ui-md-6 ui-g-12">
 									<span>6</span>
@@ -46,14 +46,17 @@
 									<span>Chances: <h:outputText value="#{hangmanBean.chances}" /></span>
 								</div>
 							</div>
-							<div class="player ui-g-4">
-								<div class="playername ui-md-6 ui-g-12">
-									<span>Player 2</span>
+							<ui:fragment rendered="#{configBean.twoPlayers}">
+								<div class="player ui-g-4">
+									<div class="playername ui-md-6 ui-g-12">
+										<span><h:outputText value="#{configBean.player2.name}" /></span>
+									</div>
+									<div class="playerscore ui-md-6 ui-g-12">
+										<span>2</span>
+									</div>
 								</div>
-								<div class="playerscore ui-md-6 ui-g-12">
-									<span>2</span>
-								</div>
-							</div>					
+							</ui:fragment>
+												
 						</div>
 						<div class="maybe-iteration basic-style ui-g">
 							<div class="side ui-g-6">
@@ -65,7 +68,10 @@
 													 title="Home"
 													 icon="ui-icon-home"
 													 styleClass="iterationButton" 
-									                 actionListener="#{hangmanBean.throwBack}"
+									                 actionListener="#{hangmanBean.throwHome}"
+									                 oncomplete="toggleSound(#{hangmanBean.soundPlaying})"
+									                 action="index"
+									                 ajax="false"
 									                 update="form"/>
 		
 									</div>
@@ -140,9 +146,21 @@
 					                disabled="#{empty hangmanBean.letter or hangmanBean.gameOver}"
 					                update="form"/>
 							</div>
+							
 <!-- 						<div class="ui-g-12">linha 1 teclado</div> -->
 <!-- 						<div class="ui-g-12">linha 2 teclado</div> -->
 <!-- 						<div class="ui-g-12">linha 3 teclado</div> -->
+
+<!-- 							<ui:fragment rendered="#{hangmanBean.gameOver}"> -->
+<!-- 								<hr/> -->
+<!-- 								<h1> -->
+<!-- 					  				<h:outputText value="Congratulations!!!" -->
+<!-- 										  rendered="#{hangmanBean.gameWin}" /> -->
+<!-- 			   						<h:outputText value="You are dead!!!" -->
+<!-- 										  rendered="#{hangmanBean.gameLose}" />	 -->
+<!-- 								</h1> -->
+<!-- 							</ui:fragment> -->
+
 						</div>
 					</div>
 					<div class="rank center-align ui-md-2 ui-g-12">
