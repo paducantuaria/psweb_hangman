@@ -30,6 +30,7 @@ public class Hangman {
 	 * @since 1.0	 * 
 	 */
 	public void reset() {
+
 		currentWord = WordServices.selectWord();
 		chances = 6;
 		history = new ArrayList<Character>();
@@ -127,4 +128,6 @@ public class Hangman {
 	public String getTrueHint() {
 		return currentWord.getWordHint();
 	}
+
 }
+

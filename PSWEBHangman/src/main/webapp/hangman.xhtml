@@ -7,100 +7,173 @@
 
 	<f:view contentType="text/html">
 		<h:head>						
-			<script src="js/geral.js"></script>	
+			<script src="js/geral.js"></script>
+			<script src="js/hangman.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			<link rel="stylesheet" type="text/css" href="themes/in-game.css"></link>
+			<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"></link>
 		</h:head>
 		<h:body>
+		<audio id="audio" autoplay="true" loop="true">
+			<source src="sounds/music.ogg" type="audio/ogg" />
+		    <source src="sounds/music.mp3" type="audio/mpeg" />
+		</audio>
 		<h:form id="form">
 			<div class="ui-fluid">
 				
-				<div class="information ui-g">
-					<div class="player ui-g-4">
-						<span>player 1</span>
+				<div class="top basic-style center-align ui-g">
+					<div class="gametitle ui-g-12">
+						<span>HANGMAN</span>
 					</div>
-					<div class="clock ui-g-4">
-						<span>Clock</span>
-					</div>
-					<div class="player ui-g-4">
-						<span>player 2</span>
-					</div>					
 				</div>
 				
-				<div class="maybe-iteration ui-g">
-					<div class="side ui-g-6">
-						
-						<div class="menu ui-g-12">
-							
-							<div class=" ui-md-12 ui-g-4">
-								<h:graphicImage styleClass="menu-item" 
-   									value="images/app/back.jpg"/> 
+				<div class="middle basic-style ui-g">
+					<div class="game ui-md-10 ui-g-12">
+						<div class="information basic-style center-align ui-g">
+							<div class="player ui-g-4">
+								<div class="playername ui-md-6 ui-g-12">
+									<span><h:outputText value="#{configBean.player1.name}" /></span>
+								</div>
+								<div class="playerscore ui-md-6 ui-g-12">
+									<span>6</span>
+								</div>
 							</div>
-							<div class=" ui-md-12 ui-g-4">
-								<h:graphicImage styleClass="menu-item" 
-   									value="images/app/sound.jpg"/> 
+							<div class="panic ui-g-4">
+								<div class="clock ui-md-6 ui-g-12">
+									<span>Clock</span>
+								</div>
+								<div class="chances ui-md-6 ui-g-12">
+									<span>Chances: <h:outputText value="#{hangmanBean.chances}" /></span>
+								</div>
 							</div>
-							<div class=" ui-md-12 ui-g-4">
-								<h:graphicImage styleClass="menu-item" 
-   									value="images/app/hint.jpg"/> 
+							<ui:fragment rendered="#{configBean.twoPlayers}">
+								<div class="player ui-g-4">
+									<div class="playername ui-md-6 ui-g-12">
+										<span><h:outputText value="#{configBean.player2.name}" /></span>
+									</div>
+									<div class="playerscore ui-md-6 ui-g-12">
+										<span>2</span>
+									</div>
+								</div>
+							</ui:fragment>
+												
+						</div>
+						<div class="maybe-iteration basic-style ui-g">
+							<div class="side ui-g-6">
+								
+								<div class="menu ui-g-12">
+									
+									<div class=" ui-md-3 ui-g-12">
+										<p:commandButton
+													 title="Home"
+													 icon="ui-icon-home"
+													 styleClass="iterationButton" 
+									                 actionListener="#{hangmanBean.throwHome}"
+									                 oncomplete="toggleSound(#{hangmanBean.soundPlaying})"
+									                 action="index"
+									                 ajax="false"
+									                 update="form"/>
+		
+									</div>
+									<div class=" ui-md-3 ui-g-12">
+										<p:commandButton
+													 title="Reset"
+													 icon="ui-icon-arrowrefresh-1-w"
+													 styleClass="iterationButton" 
+									                 actionListener="#{hangmanBean.reset}"
+									                 update="form"/>
+									</div>
+									<div class=" ui-md-3 ui-g-12">
+										<p:commandButton
+													 title="Music"
+													 icon="#{hangmanBean.soundPlaying ? 'ui-icon-volume-on' : 'ui-icon-volume-off'}"
+													 styleClass="iterationButton" 
+									                 actionListener="#{hangmanBean.toggleSound}"
+									                 oncomplete="toggleSound(#{hangmanBean.soundPlaying})"
+									                 update="form"/>
+									</div>
+									<div class=" ui-md-3 ui-g-12">
+										<p:commandButton
+													 title="Hint"
+													 icon="ui-icon-help"
+													 styleClass="iterationButton" 
+									                 actionListener="#{hangmanBean.showHint}"
+									                 disabled="#{hangmanBean.hintDisplayed or hangmanBean.gameOver}"
+									                 update="form"/>
+									</div>
+									
+								</div>
+							</div>
+							<div class="side right-align ui-g-6">
+								<div class="ui-g-12">
+									<h:graphicImage styleClass="hangman"
+		   									value="images/app/hangman-#{hangmanBean.chances}.jpg"/> 
+								</div>
+							</div>		
+						</div>
+						<div class="attempts basic-style ui-g">
+							<div class="ui-g-12">
+								<span><h:outputText value="#{hangmanBean.attempts}" /></span>
+							</div>
+						</div>
+						<div class="hidden-word basic-style center-align ui-g">
+							<div class="ui-g-12">
+								<span><h:outputText value="#{hangmanBean.word}" /></span>
+							</div>
+						</div>
+						<div class="hint basic-style center-align ui-g">
+							<div class="ui-g-12">
+								<span><h:outputText value="#{hangmanBean.hint}" /></span>
+							</div>
+						</div>
+						<div class="keyboard basic-style ui-g">
+							<div class="right-align ui-g-5">
+								<span>Pick a Letter:</span>
+							</div>
+							<div class="center-align ui-g-2">
+								<p:inputText 
+									value="#{hangmanBean.letter}" 
+	                           		maxlength="1"
+	                           		readonly="#{hangmanBean.gameOver}">
+									<p:ajax event="keyup" update="form" />
+						      	</p:inputText>
+							</div>
+							<div class="ui-g-5">
+								<p:commandButton  
+									value="Guess"
+									styleClass="half-width" 
+					                actionListener="#{hangmanBean.guess}"
+					                disabled="#{empty hangmanBean.letter or hangmanBean.gameOver}"
+					                update="form"/>
 							</div>
 							
-						</div>
-						
-						<div class="rank ui-g-12">
-							<span>Top 5</span>
-						</div>
-						<div class="hint ui-g-12">
-							<span>Dica</span>
-						</div>
-					</div>
-				
-					<div class="side ui-g-6">
-						<div class="ui-g-12">
-							<h:graphicImage styleClass="hangman"
-   									value="images/app/hangman.jpg"/> 
-						</div>
-						<div class="ui-g-12">
-							<h5>Chances: <h:outputText value="#{hangmanBean.chances}" /></h5>
-							
-							<h5>Attempts: <h:outputText value="#{hangmanBean.attempts}" /></h5>
-							
-						</div>
-					</div>		
-				</div>
-				
-				<div class="hidden-word ui-g">
-					<span>Palavras escondidas</span>
-				</div>
-					
-				<div class="keyboard ui-g">
-						<div class="ui-g-12">
-							Pick a Letter:<p:inputText value="#{hangmanBean.letter}" 
-			                            maxlength="1"
-			                            readonly="#{hangmanBean.gameOver}">
-								<p:ajax event="keyup" update="form" />
-						    </p:inputText>
-						
-						</div>
-						
-						<div class="ui-g-8">
-							<p:commandButton  
-											value="Guess" 
-							                 actionListener="#{hangmanBean.guess}"
-							                 disabled="#{empty hangmanBean.letter or hangmanBean.gameOver}"
-							                 update="form"/>
-		                 </div>
-		                 
-		                 <div class="ui-g-4">
-							<p:commandButton 
-											 value="Reset" 
-							                 actionListener="#{hangmanBean.reset}"
-							                 update="form"/>
-		                
-		                 </div>
-						                 
 <!-- 						<div class="ui-g-12">linha 1 teclado</div> -->
 <!-- 						<div class="ui-g-12">linha 2 teclado</div> -->
 <!-- 						<div class="ui-g-12">linha 3 teclado</div> -->
+
+<!-- 							<ui:fragment rendered="#{hangmanBean.gameOver}"> -->
+<!-- 								<hr/> -->
+<!-- 								<h1> -->
+<!-- 					  				<h:outputText value="Congratulations!!!" -->
+<!-- 										  rendered="#{hangmanBean.gameWin}" /> -->
+<!-- 			   						<h:outputText value="You are dead!!!" -->
+<!-- 										  rendered="#{hangmanBean.gameLose}" />	 -->
+<!-- 								</h1> -->
+<!-- 							</ui:fragment> -->
+
+						</div>
+					</div>
+					<div class="rank center-align ui-md-2 ui-g-12">
+						<div class="rank ui-g">
+							<span>Top 5</span>
+							<br/>
+							<span>1º - name1</span>
+							<br/>
+							<span>2º - name2</span>
+							<br/>
+							<span>3º - name3</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</h:form>

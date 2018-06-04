@@ -22,6 +22,7 @@ public class Word {
 	private char[] wordChars;
 	@Transient
 	private char[] wordMask;
+	private String wordHint;
 	
 	private String wordHint;
 	private String wordTxt;
@@ -119,14 +120,14 @@ public class Word {
 
 	public void setWordHint(String wordHint) {
 		this.wordHint = wordHint;
-	}
-	
+	}	
+
 	public String getWordTxt() {
 		return wordTxt;
 	}
 	public void setWordTxt(String wordTxt) {
 		this.wordTxt = wordTxt;
 	}
-	
 
 }
+

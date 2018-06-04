@@ -43,6 +43,7 @@ public class HangmanBean extends _Bean {
 	// Construtor
 	//
 	public HangmanBean() {
+
 		// if (config.getTipo().equals(Tipo.ONEPLAYER)) {
 		this.hangman = new Hangman();
 		this.hangman.reset();
@@ -65,7 +66,7 @@ public class HangmanBean extends _Bean {
 		char chr = letter.toCharArray()[0];
 		hangman.input(chr);
 		letter = "";
-		if (currentHint != hangman.getTrueHint()) {
+		if(currentHint != hangman.getTrueHint()) {
 			hint = "";
 		}
 	}
@@ -76,6 +77,20 @@ public class HangmanBean extends _Bean {
 		hint = "";
 		currentHint = "";
 		// TODO Setar novo jogador corrente, persistir score do jogador
+	}
+	
+	public void showHint() {
+		currentHint = hangman.getHint();
+		hint = currentHint == hangman.getTrueHint() ? "Hint: " + currentHint : "No Hint: " + currentHint;
+	}
+	
+	public void throwHome() {
+		this.isSoundPlaying = false;
+	}
+	
+	public boolean toggleSound() {
+		isSoundPlaying = this.isSoundPlaying ? false : true;
+		return isSoundPlaying;
 	}
 
 	public void showHint() {
@@ -160,5 +175,4 @@ public class HangmanBean extends _Bean {
 	public boolean isSoundPlaying() {
 		return isSoundPlaying;
 	}
-
 }
