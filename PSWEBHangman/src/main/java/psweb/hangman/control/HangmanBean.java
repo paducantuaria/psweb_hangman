@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import psweb.hangman.model.Hangman;
 import psweb.hangman.model.Player;
-import psweb.hangman.model.Tipo;
 
 /**
  * Classe Bean
@@ -28,6 +27,8 @@ public class HangmanBean extends _Bean {
 	//
 	private Hangman hangman;
 	private Player currentPlayer;
+	private String currentHint;
+	private boolean isSoundPlaying;
 
 	@Autowired
 	private ConfigBean config; // TODO ver com Castaneda se precisa de Get/Set
@@ -36,23 +37,27 @@ public class HangmanBean extends _Bean {
 	// Campos do Formulário
 	//
 	private String letter = "";
+	private String hint = "";
 
 	//
 	// Construtor
 	//
 	public HangmanBean() {
-		//if (config.getTipo().equals(Tipo.ONEPLAYER)) {
-			this.hangman = new Hangman();
-			this.hangman.reset();
-		//}
+		// if (config.getTipo().equals(Tipo.ONEPLAYER)) {
+		this.hangman = new Hangman();
+		this.hangman.reset();
+		this.currentHint = "";
+		// TODO transferir atributo isSoundPlaying para ConfigBean?
+		this.isSoundPlaying = true;
+		// }
 	}
 
 	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador
 	// no modo vs
 
-	// TODO Método que inicia uma nova partida de acordo com as configurações setadas e o estado atual do jogo
-	
-	
+	// TODO Método que inicia uma nova partida de acordo com as configurações
+	// setadas e o estado atual do jogo
+
 	//
 	// Operações
 	//
@@ -60,12 +65,31 @@ public class HangmanBean extends _Bean {
 		char chr = letter.toCharArray()[0];
 		hangman.input(chr);
 		letter = "";
+		if (currentHint != hangman.getTrueHint()) {
+			hint = "";
+		}
 	}
 
 	public void reset() {
 		hangman.reset();
 		letter = "";
+		hint = "";
+		currentHint = "";
 		// TODO Setar novo jogador corrente, persistir score do jogador
+	}
+
+	public void showHint() {
+		currentHint = hangman.getHint();
+		hint = currentHint == hangman.getTrueHint() ? "Hint: " + currentHint : "No Hint: " + currentHint;
+	}
+
+	public void throwHome() {
+		this.isSoundPlaying = false;
+	}
+
+	public boolean toggleSound() {
+		isSoundPlaying = this.isSoundPlaying ? false : true;
+		return isSoundPlaying;
 	}
 
 	//
@@ -120,4 +144,21 @@ public class HangmanBean extends _Bean {
 	public void setCurrentPlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
 	}
+
+	public String getHint() {
+		return this.hint;
+	}
+
+	public void setHint(String hint) {
+		this.hint = hint;
+	}
+
+	public boolean isHintDisplayed() {
+		return this.currentHint.equals(hangman.getTrueHint()) ? true : false;
+	}
+
+	public boolean isSoundPlaying() {
+		return isSoundPlaying;
+	}
+
 }
