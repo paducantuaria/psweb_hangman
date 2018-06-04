@@ -43,21 +43,35 @@ public class HangmanBean extends _Bean {
 	// Construtor
 	//
 	public HangmanBean() {
-		// if (config.getTipo().equals(Tipo.ONEPLAYER)) {
+		
 		this.hangman = new Hangman();
-		this.hangman.reset();
-		this.currentHint = "";
+		start();		
 		// TODO transferir atributo isSoundPlaying para ConfigBean?
 		this.isSoundPlaying = true;
 		// }
 	}
 
 	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador
-	// no modo vs
+	// no modo vs	
 
 	// TODO Método que inicia uma nova partida de acordo com as configurações
 	// setadas e o estado atual do jogo
-
+	/**
+	 * Método para iniciar uma nova partida, conforme as configurações setadas e estado atual do jogo
+	 * 
+	 * @author Paulo Cantuária 
+	 */
+	public void start() {
+		//TODO finalizar lógica de tipo de jogo
+		//if(config.getTipo().equals(Tipo.ONEPLAYER)) {
+			//this.currentPlayer = config.getPlayer1();
+			this.hangman.reset();
+			this.currentHint = "";
+		//}else {
+			
+		//}
+	}
+	
 	//
 	// Operações
 	//
@@ -76,6 +90,8 @@ public class HangmanBean extends _Bean {
 		hint = "";
 		currentHint = "";
 		// TODO Setar novo jogador corrente, persistir score do jogador
+		
+		
 	}
 
 	public void showHint() {

@@ -33,6 +33,7 @@ public class ConfigBean extends _Bean {
 	//
 	
 	
+	
 	//
 	// Construtor
 	//
@@ -46,16 +47,16 @@ public class ConfigBean extends _Bean {
 	//
 	
 	public void setOnePlayer() {
-		this.tipo = tipo.ONEPLAYER;
+		this.tipo = Tipo.ONEPLAYER;
 	}
 	
 	public void setTwoPlayers() {
-		this.tipo = tipo.TWOPLAYER;
+		this.tipo = Tipo.TWOPLAYER;
 	}
 	
 	//
 	// Métodos de Acesso
-//
+	//
 	
 	
 
@@ -108,21 +109,21 @@ public class ConfigBean extends _Bean {
 	}
 	
 	public boolean isTwoPlayers() {
-		if("Dois Jogadores".equals(this.tipo.getTipo())) {
+		if(Tipo.TWOPLAYER.equals(this.tipo)) {
 			return true;
 		}
 		return false;
 	}
 	
 	public void setEasyDifficulty() {
-		this.dificuldade = dificuldade.FACIL;
+		this.dificuldade = Dificuldade.EASY;
 	}
 	
 	public void setNormalDifficulty() {
-		this.dificuldade = dificuldade.MEDIO;
+		this.dificuldade = Dificuldade.NORMAL;
 	}
 	
 	public void setHardDifficulty() {
-		this.dificuldade = dificuldade.DIFICIL;
+		this.dificuldade = Dificuldade.HARD;
 }
 }

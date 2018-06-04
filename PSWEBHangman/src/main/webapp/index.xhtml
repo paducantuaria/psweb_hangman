@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<script src="js/geral.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="themes/config-game.css"></link>
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"></link>
+	</h:head>
+
+	<h:body>
+		<h:form id="form">
+			<div class="ui-fluid">
+				<div class="top-config basic-style center-align ui-g">
+					<div class="ui-g-12">
+						<h:graphicImage styleClass="image-game"
+	   									value="images/app/image_game.jpg"/>
+					</div>
+				</div>
+				<div class="players-number-config basic-style center-align ui-g">
+					<div class="ui-g-12">
+						<p:commandButton actionListener="#{configBean.setOnePlayer}"
+										 action="players"
+										 ajax="false"
+					        			 value="Forever Alone"
+					        			 styleClass="btn-config" />
+					</div>
+				</div>
+				<div class="players-number-config basic-style center-align ui-g">
+					<div class="ui-g-12">
+						<p:commandButton actionListener="#{configBean.setTwoPlayers}"
+										 action="players" 
+										 ajax="false" 
+					        			 value="Against an Enemy"
+					        			 styleClass="btn-config" />
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</h:body>
+
+</f:view>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+body {
+	background-color: #c11415;
+	font-weight: bold;
+}
+
+.basic-style {
+	font-family: 'Indie Flower', cursive;
+	font-size: 20px;
+	color: white;
+}
+
+.center-align {
+	text-align: center;
+}
+
+.right-align {
+	text-align: right;
+}
+
+.half-width {
+	width: 50% !important;
+}
+
+.image-game {
+	width: inherit;
+	max-width: 450px;
+}
+
+.input-config {
+	max-width: 450px;
+}
+
+.btn-config {
+	max-width: 150px;
+	height: 40px;
+}	
+
+.players-number-config {
+	margin-top: 30px;
+}
+
+.label-name-player-config {
+	margin-top: 20px;
+}
+
+.navigation {
+	margin-top: 30px;
+}
+
+.difficulty-config {
+	margin-top: 20px;
+}
+
+.ui-g-12 {
+	padding: .2em;
+}
+
+@media only screen and (max-width: 600px) {
+}    

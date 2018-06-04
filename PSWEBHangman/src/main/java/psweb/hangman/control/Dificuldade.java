@@ -1,7 +1,7 @@
 package psweb.hangman.control;
 
 public enum Dificuldade {
-	FACIL("Fácil"), MEDIO("Médio"), DIFICIL("Difícil");
+	EASY("Easy"), NORMAL("Normal"), HARD("Hard");
 
 	private final String dificuldade;
 

@@ -3,8 +3,6 @@ package psweb.hangman.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import psweb.hangman.model.dao.GenericDAO;
-
 /**
  * Classe base do Jogo
  * 
@@ -27,7 +25,7 @@ public class Hangman {
 	/**
 	 * Reinicia o jogo e sorteia uma nova palavra
 	 * 
-	 * @since 1.0	 * 
+	 * @since 1.0
 	 */
 	public void reset() {
 		currentWord = WordServices.selectWord();
