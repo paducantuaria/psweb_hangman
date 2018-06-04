@@ -125,7 +125,7 @@ public class Word {
 
 	public void setWordHint(String wordHint) {
 		this.wordHint = wordHint;
-	}
+	}	
 
 	public String getWordTxt() {
 		return wordTxt;
@@ -134,7 +134,7 @@ public class Word {
 	public void setWordTxt(String wordTxt) {
 		this.wordTxt = wordTxt;
 	}
-
+  
 	public Dificuldade getDificuldade() {
 		return dificuldade;
 	}
@@ -169,3 +169,4 @@ public class Word {
 	}
 
 }
+

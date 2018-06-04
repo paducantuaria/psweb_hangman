@@ -20,18 +20,22 @@ import psweb.hangman.model.Tipo;
 @ManagedBean
 @SessionScoped
 public class ConfigBean extends _Bean {
-
+	
+	//
+	// Atributos
+	//
 	private Dificuldade dificuldade;
 	private List<Player> players;
 	private Player player1;
 	private Player player2;
-	private Tipo tipo; // Um jogador / dois jogadores	
+
+	private Tipo tipo; // Um jogador / dois jogadores
+
 	private int qtdPArtidas;
 	
 	//
 	// Campos do Formulário
 	//
-	
 	
 	
 	//
@@ -52,13 +56,12 @@ public class ConfigBean extends _Bean {
 	
 	public void setTwoPlayers() {
 		this.tipo = Tipo.TWOPLAYER;
+
 	}
 	
 	//
 	// Métodos de Acesso
 	//
-	
-	
 
 	public Dificuldade getDificuldade() {
 		return dificuldade;
@@ -116,6 +119,7 @@ public class ConfigBean extends _Bean {
 	}
 	
 	public void setEasyDifficulty() {
+
 		this.dificuldade = Dificuldade.EASY;
 	}
 	
@@ -126,4 +130,5 @@ public class ConfigBean extends _Bean {
 	public void setHardDifficulty() {
 		this.dificuldade = Dificuldade.HARD;
 }
+
 }
