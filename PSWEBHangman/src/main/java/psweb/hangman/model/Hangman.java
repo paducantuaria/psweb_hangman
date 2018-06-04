@@ -3,6 +3,8 @@ package psweb.hangman.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import psweb.hangman.model.dao.GenericDAO;
+
 /**
  * Classe base do Jogo
  * 
@@ -28,7 +30,10 @@ public class Hangman {
 	 * @since 1.0	 * 
 	 */
 	public void reset() {
-		reset("Hello", "Greeting"); // TODO - Buscar de um dicionario acrescentar parâmetro de dificuldade no construtor
+
+		currentWord = WordServices.selectWord();
+		chances = 6;
+		history = new ArrayList<Character>();
 	}
 	
 	
@@ -123,4 +128,6 @@ public class Hangman {
 	public String getTrueHint() {
 		return currentWord.getWordHint();
 	}
+
 }
+

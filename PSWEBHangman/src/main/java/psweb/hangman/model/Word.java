@@ -3,6 +3,7 @@ package psweb.hangman.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  * Classe da palavra que será usada no jogo
@@ -17,10 +18,17 @@ public class Word {
 	@GeneratedValue
 	private Long id;
 
+	@Transient
 	private char[] wordChars;
+	@Transient
 	private char[] wordMask;
 	private String wordHint;
 	
+	private String wordHint;
+	private String wordTxt;
+	
+	
+	 
 	/**
 	 * Construtor sem argumentos para ser usado pela JPA
 	 * @deprecated para indicar que não será usado na aplicação
@@ -112,8 +120,14 @@ public class Word {
 
 	public void setWordHint(String wordHint) {
 		this.wordHint = wordHint;
+	}	
+
+	public String getWordTxt() {
+		return wordTxt;
 	}
-	
-	
+	public void setWordTxt(String wordTxt) {
+		this.wordTxt = wordTxt;
+	}
 
 }
+

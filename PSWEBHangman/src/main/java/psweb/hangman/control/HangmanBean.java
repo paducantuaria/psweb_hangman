@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import psweb.hangman.model.Hangman;
 import psweb.hangman.model.Player;
-import psweb.hangman.model.Tipo;
 
 /**
  * Classe Bean
@@ -44,20 +43,22 @@ public class HangmanBean extends _Bean {
 	// Construtor
 	//
 	public HangmanBean() {
-		//if (config.getTipo().equals(Tipo.ONEPLAYER)) {
-			this.hangman = new Hangman();
-			this.hangman.reset();
-			this.currentHint = "";
-			this.isSoundPlaying = true;
-		//}
+
+		// if (config.getTipo().equals(Tipo.ONEPLAYER)) {
+		this.hangman = new Hangman();
+		this.hangman.reset();
+		this.currentHint = "";
+		// TODO transferir atributo isSoundPlaying para ConfigBean?
+		this.isSoundPlaying = true;
+		// }
 	}
 
 	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador
 	// no modo vs
 
-	// TODO Método que inicia uma nova partida de acordo com as configurações setadas e o estado atual do jogo
-	
-	
+	// TODO Método que inicia uma nova partida de acordo com as configurações
+	// setadas e o estado atual do jogo
+
 	//
 	// Operações
 	//
@@ -87,6 +88,20 @@ public class HangmanBean extends _Bean {
 		this.isSoundPlaying = false;
 	}
 	
+	public boolean toggleSound() {
+		isSoundPlaying = this.isSoundPlaying ? false : true;
+		return isSoundPlaying;
+	}
+
+	public void showHint() {
+		currentHint = hangman.getHint();
+		hint = currentHint == hangman.getTrueHint() ? "Hint: " + currentHint : "No Hint: " + currentHint;
+	}
+
+	public void throwHome() {
+		this.isSoundPlaying = false;
+	}
+
 	public boolean toggleSound() {
 		isSoundPlaying = this.isSoundPlaying ? false : true;
 		return isSoundPlaying;
@@ -152,7 +167,7 @@ public class HangmanBean extends _Bean {
 	public void setHint(String hint) {
 		this.hint = hint;
 	}
-	
+
 	public boolean isHintDisplayed() {
 		return this.currentHint.equals(hangman.getTrueHint()) ? true : false;
 	}
