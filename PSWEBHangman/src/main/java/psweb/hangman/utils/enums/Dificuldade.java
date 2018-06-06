@@ -1,4 +1,4 @@
-package psweb.hangman.control;
+package psweb.hangman.utils.enums;
 
 public enum Dificuldade {
 	EASY("Easy"), NORMAL("Normal"), HARD("Hard");

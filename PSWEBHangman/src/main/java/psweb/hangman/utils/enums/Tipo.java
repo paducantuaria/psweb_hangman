@@ -1,4 +1,4 @@
-package psweb.hangman.model;
+package psweb.hangman.utils.enums;
 
 public enum Tipo {
 	ONEPLAYER("Um Jogador"), TWOPLAYER("Dois Jogadores");
