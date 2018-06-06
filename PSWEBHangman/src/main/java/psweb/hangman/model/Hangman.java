@@ -3,6 +3,8 @@ package psweb.hangman.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import psweb.hangman.services.WordServices;
+
 /**
  * Classe base do Jogo
  * 

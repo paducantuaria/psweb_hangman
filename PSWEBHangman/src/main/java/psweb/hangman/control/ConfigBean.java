@@ -8,7 +8,8 @@ import javax.faces.bean.SessionScoped;
 import org.springframework.stereotype.Component;
 
 import psweb.hangman.model.Player;
-import psweb.hangman.model.Tipo;
+import psweb.hangman.utils.enums.Dificuldade;
+import psweb.hangman.utils.enums.Tipo;
 
 /**
  * Classe bean para a configuração do jogo

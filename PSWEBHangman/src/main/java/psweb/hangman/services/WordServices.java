@@ -1,8 +1,9 @@
-package psweb.hangman.model;
+package psweb.hangman.services;
 
 import java.util.List;
 import java.util.Random;
 
+import psweb.hangman.model.Word;
 import psweb.hangman.model.dao.GenericDAO;
 import psweb.hangman.model.dao.PersistenceManager;
 

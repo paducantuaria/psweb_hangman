@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-import psweb.hangman.control.Dificuldade;
+import psweb.hangman.utils.enums.Dificuldade;
 
 /**
  * Classe da palavra que será usada no jogo
