@@ -14,14 +14,14 @@ import psweb.hangman.utils.enums.Tipo;
 /**
  * Classe bean para a configuração do jogo
  * 
- * @author Paulo Cantuária e Augusto 
+ * @author Paulo Cantuária e Augusto
  * @since 1.0
  */
 @Component
 @ManagedBean
 @SessionScoped
 public class ConfigBean extends _Bean {
-	
+
 	//
 	// Atributos
 	//
@@ -33,41 +33,36 @@ public class ConfigBean extends _Bean {
 	private Tipo tipo; // Um jogador / dois jogadores
 
 	private int qtdPArtidas;
-		
-	
+
 	//
 	// Campos do Formulário
 	//
-	
-	
+
 	//
 	// Construtor
 	//
 	public ConfigBean() {
 		this.player1 = new Player();
 		this.player2 = new Player();
-		
 	}
-	
+
 	//
 	// Operações
 	//
-	
+
 	public void setOnePlayer() {
 		this.tipo = Tipo.ONEPLAYER;
-		
+
 	}
-	
+
 	public void setTwoPlayers() {
 		this.tipo = Tipo.TWOPLAYER;
 
 	}
-	
+
 	//
 	// Métodos de Acesso
 	//
-	
-	
 
 	public Dificuldade getDificuldade() {
 		return dificuldade;
@@ -116,26 +111,26 @@ public class ConfigBean extends _Bean {
 	public void setPlayer2(Player player2) {
 		this.player2 = player2;
 	}
-	
+
 	public boolean isTwoPlayers() {
-		if(Tipo.TWOPLAYER.equals(this.tipo)) {
+		if (Tipo.TWOPLAYER.equals(this.tipo)) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public void setEasyDifficulty() {
 		this.dificuldade = Dificuldade.EASY;
 	}
-	
+
 	public void setNormalDifficulty() {
 		this.dificuldade = Dificuldade.NORMAL;
 	}
-	
+
 	public void setHardDifficulty() {
 		this.dificuldade = Dificuldade.HARD;
-}
-	
+	}
+
 	@Override
 	public String toString() {
 		return "Dificuldade: " + dificuldade + " Player 1: " + player1 + " Tipo: " + tipo;

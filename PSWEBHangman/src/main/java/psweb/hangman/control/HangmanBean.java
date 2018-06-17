@@ -55,11 +55,9 @@ public class HangmanBean extends _Bean {
 		return config;
 	}
 
-	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador
-	// no modo vs
+	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador no modo vs
 
-	// TODO Método que inicia uma nova partida de acordo com as configurações
-	// setadas e o estado atual do jogo
+	
 	/**
 	 * Método para iniciar uma nova partida, conforme as configurações setadas e
 	 * estado atual do jogo
@@ -109,13 +107,10 @@ public class HangmanBean extends _Bean {
 			}
 			hangman.reset(wordFromPlayer);			
 		} else {
-			System.out.println("Deu Errado");
+			System.out.println("Deu Errado"); //TODO remover SYSO
 			hangman.reset();
 		}
-		
-		
-		
-		
+				
 		
 		// TODO Setar novo jogador corrente, persistir score do jogador
 
