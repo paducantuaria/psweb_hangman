@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import psweb.hangman.services.WordServices;
+import psweb.hangman.utils.enums.Dificuldade;
 
 /**
  * Classe base do Jogo
@@ -13,17 +14,16 @@ import psweb.hangman.services.WordServices;
  */
 
 public class Hangman {
-	
-	
+
 	private int chances = 6;
 	private List<Character> history;
-		
+
 	private Word currentWord;
 
 	public Hangman() {
 		history = new ArrayList<Character>();
 	}
-	
+
 	/**
 	 * Reinicia o jogo e sorteia uma nova palavra
 	 * 
@@ -35,12 +35,26 @@ public class Hangman {
 		chances = 6;
 		history = new ArrayList<Character>();
 	}
-	
-	
+
+	/**
+	 * Reinicia o jogo e sorteia uma nova palavra dentro da dificuldade escolhida
+	 * 
+	 * @since 1.0
+	 */
+	public void reset(Dificuldade dificuldade) {
+
+		currentWord = WordServices.selectWord(dificuldade);
+		chances = 6;
+		history = new ArrayList<Character>();
+	}
+
 	/**
 	 * Reinicia o jogo com uma palavra escolhida
 	 * 
-	 * @param forcedWord palavra que será utilizada no construtor
+	 * @param forcedWord
+	 *            palavra que será utilizada no construtor
+	 * @param forcedHint
+	 *            dica da palavra que será utilizada no construtor
 	 */
 	public void reset(String forcedWord, String forcedHint) {
 		currentWord = new Word(forcedWord);
@@ -49,23 +63,36 @@ public class Hangman {
 		history = new ArrayList<Character>();
 	}
 
-	
+	/**
+	 * Reinicia o jogo com uma palavra escolhida
+	 * 
+	 * @param forcedWord
+	 *            palavra que será utilizada no construtor
+	 */
+	public void reset(String forcedWord) {
+		currentWord = new Word(forcedWord);
+		chances = 6;
+		history = new ArrayList<Character>();
+	}
+
 	/**
 	 * Faz o input de um caractere
 	 * 
-	 * @param chr caractere a ser inserido
-	 * @return método input de Word em currentWord 
+	 * @param chr
+	 *            caractere a ser inserido
+	 * @return método input de Word em currentWord
 	 */
 	public boolean input(Character chr) {
 		boolean match = currentWord.input(chr);
 
-		// TODO implementar lógica do contador de vidas (caso uma letra repetida seja inserida, etc)
+		// TODO implementar lógica do contador de vidas (caso uma letra repetida seja
+		// inserida, etc)
 		// Atualiza o contador de vidas
 		if (!match)
 			chances--;
 
 		// Atualiza o histórico
-		if(!history.contains(Character.toUpperCase(chr))) {
+		if (!history.contains(Character.toUpperCase(chr))) {
 			history.add(Character.toUpperCase(chr));
 		}
 
@@ -103,31 +130,32 @@ public class Hangman {
 	public boolean isGameOver() {
 		return chances == 0 || isComplete();
 	}
-	
-	/** 
-	 * Retorna a dica da palavra somente se as chances estão pela metade, senão, retorna frase irônica
+
+	/**
+	 * Retorna a dica da palavra somente se as chances estão pela metade, senão,
+	 * retorna frase irônica
+	 * 
 	 * @author augusto
 	 * @return String Dica da palavra
 	 */
 	public String getHint() {
-		switch(chances) {
+		switch (chances) {
 		case 6:
 			return "Too early for this...";
-			
+
 		case 5:
 			return "Calm down, it's not yet time to hint.";
-			
+
 		case 4:
-			return "One more try do get hint!";
-		
+			return "One more try to get hint!";
+
 		default:
 			return getTrueHint();
 		}
 	}
-	
+
 	public String getTrueHint() {
 		return currentWord.getWordHint();
 	}
 
 }
-

@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
  * @author @author Paulo Cantuária
  * @since 1.0
  */
-public class PersistenceManager {
+public abstract class PersistenceManager {
 	
 	private static EntityManagerFactory factory =
 			Persistence.createEntityManagerFactory("HANGMANPU");

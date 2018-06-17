@@ -33,6 +33,7 @@ public class ConfigBean extends _Bean {
 	private Tipo tipo; // Um jogador / dois jogadores
 
 	private int qtdPArtidas;
+		
 	
 	//
 	// Campos do Formulário
@@ -45,6 +46,7 @@ public class ConfigBean extends _Bean {
 	public ConfigBean() {
 		this.player1 = new Player();
 		this.player2 = new Player();
+		
 	}
 	
 	//
@@ -53,6 +55,7 @@ public class ConfigBean extends _Bean {
 	
 	public void setOnePlayer() {
 		this.tipo = Tipo.ONEPLAYER;
+		
 	}
 	
 	public void setTwoPlayers() {
@@ -63,6 +66,8 @@ public class ConfigBean extends _Bean {
 	//
 	// Métodos de Acesso
 	//
+	
+	
 
 	public Dificuldade getDificuldade() {
 		return dificuldade;
@@ -120,7 +125,6 @@ public class ConfigBean extends _Bean {
 	}
 	
 	public void setEasyDifficulty() {
-
 		this.dificuldade = Dificuldade.EASY;
 	}
 	
@@ -131,5 +135,10 @@ public class ConfigBean extends _Bean {
 	public void setHardDifficulty() {
 		this.dificuldade = Dificuldade.HARD;
 }
+	
+	@Override
+	public String toString() {
+		return "Dificuldade: " + dificuldade + " Player 1: " + player1 + " Tipo: " + tipo;
+	}
 
 }

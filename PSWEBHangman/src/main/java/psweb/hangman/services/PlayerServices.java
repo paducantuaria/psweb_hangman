@@ -11,11 +11,19 @@ import psweb.hangman.model.dao.PersistenceManager;
 
 @Service
 public class PlayerServices {
-
+		
 	@Transactional
 	public static List<Player> listAllPlayers() {
 		GenericDAO<Player> playerDao = PersistenceManager.createGenericDAO(Player.class);
 		return playerDao.findAll();
 	}
+	
+	@Transactional
+	public static void insert(Player player) {
+		GenericDAO<Player> playerDao = PersistenceManager.createGenericDAO(Player.class);
+		playerDao.insert(player);
+	}
+	
+	
 
 }

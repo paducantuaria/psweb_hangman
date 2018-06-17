@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -14,10 +15,13 @@
 			<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"></link>
 		</h:head>
 		<h:body>
+		
+		
 		<audio id="audio" autoplay="true" loop="true">
 			<source src="sounds/music.ogg" type="audio/ogg" />
 		    <source src="sounds/music.mp3" type="audio/mpeg" />
-		</audio>
+		</audio>		
+		
 		<h:form id="form">
 			<div class="ui-fluid">
 				
@@ -93,7 +97,7 @@
 									                 actionListener="#{hangmanBean.toggleSound}"
 									                 oncomplete="toggleSound(#{hangmanBean.soundPlaying})"
 									                 update="form"/>
-									</div>
+									</div>									
 									<div class=" ui-md-3 ui-g-12">
 										<p:commandButton
 													 title="Hint"
@@ -101,7 +105,8 @@
 													 styleClass="iterationButton" 
 									                 actionListener="#{hangmanBean.showHint}"
 									                 disabled="#{hangmanBean.hintDisplayed or hangmanBean.gameOver}"
-									                 update="form"/>
+									                 update="form"
+									                 rendered="#{!configBean.twoPlayers}"/>
 									</div>
 									
 								</div>
@@ -153,15 +158,15 @@
 <!-- 						<div class="ui-g-12">linha 2 teclado</div> -->
 <!-- 						<div class="ui-g-12">linha 3 teclado</div> -->
 
-<!-- 							<ui:fragment rendered="#{hangmanBean.gameOver}"> -->
-<!-- 								<hr/> -->
-<!-- 								<h1> -->
-<!-- 					  				<h:outputText value="Congratulations!!!" -->
-<!-- 										  rendered="#{hangmanBean.gameWin}" /> -->
-<!-- 			   						<h:outputText value="You are dead!!!" -->
-<!-- 										  rendered="#{hangmanBean.gameLose}" />	 -->
-<!-- 								</h1> -->
-<!-- 							</ui:fragment> -->
+							<ui:fragment rendered="#{hangmanBean.gameOver}">
+								<hr/>
+								<h1>
+					  				<h:outputText value="Congratulations!!!"
+										  rendered="#{hangmanBean.gameWin}" />
+			   						<h:outputText value="You are dead!!!"
+										  rendered="#{hangmanBean.gameLose}" />	
+								</h1>
+							</ui:fragment>
 
 						</div>
 					</div>
