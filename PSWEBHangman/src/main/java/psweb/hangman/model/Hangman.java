@@ -39,6 +39,8 @@ public class Hangman {
 	/**
 	 * Reinicia o jogo e sorteia uma nova palavra dentro da dificuldade escolhida
 	 * 
+	 * @param dificuldade
+	 *            dificuldade do jogo
 	 * @since 1.0
 	 */
 	public void reset(Dificuldade dificuldade) {
@@ -80,21 +82,19 @@ public class Hangman {
 	 * 
 	 * @param chr
 	 *            caractere a ser inserido
-	 * @return método input de Word em currentWord
+	 * @return retorno do método input de Word em currentWord
 	 */
 	public boolean input(Character chr) {
 		boolean match = currentWord.input(chr);
-
-		// TODO implementar lógica do contador de vidas (caso uma letra repetida seja
-		// inserida, etc)
-		// Atualiza o contador de vidas
-		if (!match)
-			chances--;
-
-		// Atualiza o histórico
+		
 		if (!history.contains(Character.toUpperCase(chr))) {
+			// Atualiza o histórico
 			history.add(Character.toUpperCase(chr));
-		}
+			if (!match) {
+				// Atualiza o contador de vidas
+				chances--;
+			}
+		}	
 
 		return match;
 	}
