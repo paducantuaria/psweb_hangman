@@ -10,6 +10,6 @@
 	<!-- ====================================== -->
 	<!-- Componentes			 				-->
 	<!-- ====================================== -->
-	<context:component-scan base-package="psweb.jsftutorial.*" />
+	<context:component-scan base-package="psweb.hangman.*" />
 	
 </beans>

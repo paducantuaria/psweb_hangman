@@ -2,6 +2,7 @@ package psweb.hangman.control;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import psweb.hangman.model.Hangman;
 import psweb.hangman.model.Player;
+import psweb.hangman.services.PlayerServices;
+import psweb.hangman.utils.enums.Tipo;
 
 /**
  * Classe Bean
@@ -29,6 +32,7 @@ public class HangmanBean extends _Bean {
 	private Player currentPlayer;
 	private String currentHint;
 	private boolean isSoundPlaying;
+	
 
 	@Autowired
 	private ConfigBean config; // TODO ver com Castaneda se precisa de Get/Set
@@ -38,42 +42,38 @@ public class HangmanBean extends _Bean {
 	//
 	private String letter = "";
 	private String hint = "";
+	private String wordFromPlayer = "";
 
 	//
 	// Construtor
 	//
 	public HangmanBean() {
-
-		// if (config.getTipo().equals(Tipo.ONEPLAYER)) {
-
 		this.hangman = new Hangman();
-		start();		
-		// TODO transferir atributo isSoundPlaying para ConfigBean?
-		this.isSoundPlaying = true;
-		// }
+	}
+
+	public ConfigBean getConfigBean() {
+		return config;
 	}
 
 	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador
-	// no modo vs	
+	// no modo vs
 
 	// TODO Método que inicia uma nova partida de acordo com as configurações
 	// setadas e o estado atual do jogo
 	/**
-	 * Método para iniciar uma nova partida, conforme as configurações setadas e estado atual do jogo
+	 * Método para iniciar uma nova partida, conforme as configurações setadas e
+	 * estado atual do jogo
 	 * 
-	 * @author Paulo Cantuária 
+	 * @author Paulo Cantuária e Augusto José
 	 */
-	public void start() {
-		//TODO finalizar lógica de tipo de jogo
-		//if(config.getTipo().equals(Tipo.ONEPLAYER)) {
-			//this.currentPlayer = config.getPlayer1();
-			this.hangman.reset();
-			this.currentHint = "";
-		//}else {
-			
-		//}
+	@PostConstruct
+	public void start() { // TODO esse start deve ser algum evento da página para que não precise ser vinculado ao construtor
+		// TODO transferir atributo isSoundPlaying para ConfigBean?
+		this.isSoundPlaying = true;
+		currentPlayer = config.getPlayer1();
+		reset();
 	}
-	
+
 	//
 	// Operações
 	//
@@ -81,19 +81,45 @@ public class HangmanBean extends _Bean {
 		char chr = letter.toCharArray()[0];
 		hangman.input(chr);
 		letter = "";
-		if(currentHint != hangman.getTrueHint()) {
+		if (currentHint != hangman.getTrueHint()) {
 			hint = "";
 		}
 	}
 
 	public void reset() {
-		hangman.reset();
+		System.out.println(config); //TODO remover SYSO
+		
 		letter = "";
 		hint = "";
 		currentHint = "";
-		// TODO Setar novo jogador corrente, persistir score do jogador		
 		
-	}	
+		Player p1 = config.getPlayer1();
+		if(Tipo.ONEPLAYER.equals(config.getTipo())) {
+			p1.setScore(p1.getScore()+p1.getCurrentScore());
+			PlayerServices.insert(p1);
+			
+			hangman.reset(config.getDificuldade());
+			
+		}else if(Tipo.TWOPLAYER.equals(config.getTipo())) {
+			Player p2 = config.getPlayer2();
+			if(currentPlayer.equals(p1)) {
+				currentPlayer = p2;
+			}else {
+				currentPlayer = p1;
+			}
+			hangman.reset(wordFromPlayer);			
+		} else {
+			System.out.println("Deu Errado");
+			hangman.reset();
+		}
+		
+		
+		
+		
+		
+		// TODO Setar novo jogador corrente, persistir score do jogador
+
+	}
 
 	public void showHint() {
 		currentHint = hangman.getHint();
@@ -102,6 +128,7 @@ public class HangmanBean extends _Bean {
 
 	public void throwHome() {
 		this.isSoundPlaying = false;
+		reset();
 	}
 
 	public boolean toggleSound() {
