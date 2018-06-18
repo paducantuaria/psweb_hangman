@@ -21,6 +21,14 @@ public class PlayerServices {
 	@Transactional
 	public static void insert(Player player) {
 		GenericDAO<Player> playerDao = PersistenceManager.createGenericDAO(Player.class);
+		PersistenceManager.getTransaction().begin();
+		try {	
+			//TODO Ver lógica de inserir player duplicado
 		playerDao.insert(player);
+		PersistenceManager.getTransaction().commit();
+		}catch(Exception e ) {
+			PersistenceManager.getTransaction().rollback();
+
+		}
 	}
 }
