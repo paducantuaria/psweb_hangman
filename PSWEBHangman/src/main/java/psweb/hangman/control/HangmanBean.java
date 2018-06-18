@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import psweb.hangman.model.Hangman;
 import psweb.hangman.model.Player;
 import psweb.hangman.services.PlayerServices;
+import psweb.hangman.utils.enums.Dificuldade;
 import psweb.hangman.utils.enums.Tipo;
 
 /**
@@ -32,10 +33,9 @@ public class HangmanBean extends _Bean {
 	private Player currentPlayer;
 	private String currentHint;
 	private boolean isSoundPlaying;
-	
 
 	@Autowired
-	private ConfigBean config; // TODO ver com Castaneda se precisa de Get/Set
+	private ConfigBean config;
 
 	//
 	// Campos do Formulário
@@ -55,9 +55,9 @@ public class HangmanBean extends _Bean {
 		return config;
 	}
 
-	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador no modo vs
+	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador
+	// no modo vs
 
-	
 	/**
 	 * Método para iniciar uma nova partida, conforme as configurações setadas e
 	 * estado atual do jogo
@@ -65,7 +65,8 @@ public class HangmanBean extends _Bean {
 	 * @author Paulo Cantuária e Augusto José
 	 */
 	@PostConstruct
-	public void start() { // TODO esse start deve ser algum evento da página para que não precise ser vinculado ao construtor
+	public void start() { // TODO esse start deve ser algum evento da página para que não precise ser
+							// vinculado ao construtor
 		// TODO transferir atributo isSoundPlaying para ConfigBean?
 		this.isSoundPlaying = true;
 		currentPlayer = config.getPlayer1();
@@ -85,33 +86,52 @@ public class HangmanBean extends _Bean {
 	}
 
 	public void reset() {
-		System.out.println(config); //TODO remover SYSO
-		
+		System.out.println(config); // TODO remover SYSO
+		int score = 0;
 		letter = "";
 		hint = "";
 		currentHint = "";
-		
+
 		Player p1 = config.getPlayer1();
-		if(Tipo.ONEPLAYER.equals(config.getTipo())) {
-			p1.setScore(p1.getScore()+p1.getCurrentScore());
+		
+		//TODO Ver onde fica melhor essa lógica de pontuação
+		if (Tipo.ONEPLAYER.equals(config.getTipo())) {
+			if (isGameWin()) {
+				Dificuldade dificulty = config.getDificuldade();
+				switch (dificulty) {
+				case EASY:
+					score = 2;
+					break;
+				case NORMAL:
+					score = 3;
+					break;
+				case HARD:
+					score = 4;
+					break;
+				}
+
+				if (isHintDisplayed()) {
+					score--;
+				}
+				p1.setCurrentScore(score);
+			}
+			p1.setScore(p1.getScore() + p1.getCurrentScore());
 			PlayerServices.insert(p1);
-			
 			hangman.reset(config.getDificuldade());
-			
-		}else if(Tipo.TWOPLAYER.equals(config.getTipo())) {
+
+		} else if (Tipo.TWOPLAYER.equals(config.getTipo())) {
 			Player p2 = config.getPlayer2();
-			if(currentPlayer.equals(p1)) {
+			if (currentPlayer.equals(p1)) {
 				currentPlayer = p2;
-			}else {
+			} else {
 				currentPlayer = p1;
 			}
-			hangman.reset(wordFromPlayer);			
+			hangman.reset(wordFromPlayer);
 		} else {
-			System.out.println("Deu Errado"); //TODO remover SYSO
+			System.out.println("Deu Errado"); // TODO remover SYSO
 			hangman.reset();
 		}
-				
-		
+
 		// TODO Setar novo jogador corrente, persistir score do jogador
 
 	}
