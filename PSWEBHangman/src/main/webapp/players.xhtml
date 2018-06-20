@@ -7,6 +7,7 @@
 
 <f:view contentType="text/html">
 	<h:head>
+		<meta name="viewport" content="width=device-width" />
 		<script src="js/geral.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="themes/config-game.css"></link>
@@ -64,30 +65,21 @@
 					</div>
 					
 					<div class="ui-g-4 right-align">
-						<ui:fragment rendered="#{configBean.twoPlayers}">
-							<p:commandButton 
-											 action="hangman"
-											 ajax="false"
-						        			 value="Next"
-						        			 styleClass="btn-config" />
-						</ui:fragment>
-						<ui:fragment rendered="#{!(configBean.twoPlayers)}">
-							<p:commandButton 
-											 action="difficulty"
-											 ajax="false"
-						        			 value="Next"
-						        			 styleClass="btn-config" />
-						</ui:fragment>
+					
+						<p:commandButton actionListener="#{hangmanBean.start}"
+										 action="hangman"
+										 ajax="false"
+					        			 value="Next"
+					        			 styleClass="btn-config"
+					        			 rendered="#{configBean.twoPlayers}" />
+					        			 
+						<p:commandButton action="difficulty"
+										 ajax="false"
+					        			 value="Next"
+					        			 styleClass="btn-config"
+					        			 rendered="#{!(configBean.twoPlayers)}" />
 					</div>
 					
-<!-- 					<div class="ui-g-4 right-align"> -->
-<!-- 						<p:commandButton  -->
-<!-- 										 action="#{configBean.twoPlayers ? 'hangman' : 'difficulty'}" -->
-<!-- 										 ajax="false" -->
-<!-- 					        			 value="Next" -->
-<!-- 					        			 styleClass="btn-config" /> -->
-<!-- 					</div> -->
-
 				</div>
 			</div>
 		</h:form>
