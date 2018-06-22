@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -57,6 +58,13 @@ public class HangmanBean extends _Bean {
 
 	// TODO Criar método para instanciar hangman com a palavra passada pelo jogador
 	// no modo vs
+	
+	
+	public void setDifficulty(ActionEvent event) {
+		config.setDifficulty(event);
+		start();
+	}
+	
 
 	/**
 	 * Método para iniciar uma nova partida, conforme as configurações setadas e
@@ -64,10 +72,8 @@ public class HangmanBean extends _Bean {
 	 * 
 	 * @author Paulo Cantuária e Augusto José
 	 */
-	@PostConstruct
-	public void start() { // TODO esse start deve ser algum evento da página para que não precise ser
-							// vinculado ao construtor
-		// TODO transferir atributo isSoundPlaying para ConfigBean?
+	public void start() {
+		System.out.println(config); // TODO remover SYSO
 		this.isSoundPlaying = true;
 		currentPlayer = config.getPlayer1();
 		reset();
@@ -96,7 +102,8 @@ public class HangmanBean extends _Bean {
 		
 		//TODO Ver onde fica melhor essa lógica de pontuação
 		if (Tipo.ONEPLAYER.equals(config.getTipo())) {
-			if (isGameWin()) {
+			//if (isGameWin()) { // TODO isGameWin precisa de um currentWord que, na primeira vez, não existe ainda neste ponto
+			if (false) {
 				Dificuldade dificulty = config.getDificuldade();
 				switch (dificulty) {
 				case EASY:
@@ -142,8 +149,7 @@ public class HangmanBean extends _Bean {
 	}
 
 	public void throwHome() {
-		this.isSoundPlaying = false;
-		reset();
+		this.isSoundPlaying = true;
 	}
 
 	public boolean toggleSound() {

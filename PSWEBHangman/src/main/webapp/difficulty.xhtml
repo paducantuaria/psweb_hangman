@@ -7,6 +7,7 @@
 
 <f:view contentType="text/html">
 	<h:head>
+		<meta name="viewport" content="width=device-width" />
 		<script src="js/geral.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="themes/config-game.css"></link>
@@ -25,29 +26,35 @@
 				
 				<div class="difficulty-config basic-style center-align ui-g">
 					<div class="ui-g-12">
-						<p:commandButton actionListener="#{configBean.setEasyDifficulty}"
+						<p:commandButton actionListener="#{hangmanBean.setDifficulty}"
 										 action="hangman"
 										 ajax="false"
-					        			 value="Easy"
-					        			 styleClass="btn-config" />
+										 value="Easy"
+										 styleClass="btn-config" >
+									 	 <f:attribute name="difficulty" value="EASY" />
+						</p:commandButton>
 					</div>
 				</div>
 				<div class="difficulty-config basic-style center-align ui-g">
 					<div class="ui-g-12">
-						<p:commandButton actionListener="#{configBean.setNormalDifficulty}"
+						<p:commandButton actionListener="#{hangmanBean.setDifficulty}"
 										 action="hangman"
 										 ajax="false"
-					        			 value="Normal"
-					        			 styleClass="btn-config" />
+										 value="Normal"
+										 styleClass="btn-config" >
+										 <f:attribute name="difficulty" value="NORMAL" />
+						</p:commandButton>
 					</div>
 				</div>
 				<div class="difficulty-config basic-style center-align ui-g">
 					<div class="ui-g-12">
-						<p:commandButton actionListener="#{configBean.setHardDifficulty}"
-										 action="hangman"
+						<p:commandButton actionListener="#{hangmanBean.setDifficulty}"
+								 		 action="hangman"
 										 ajax="false"
-					        			 value="Hard"
-					        			 styleClass="btn-config" />
+										 value="Hard"
+										 styleClass="btn-config" >
+										 <f:attribute name="difficulty" value="HARD" />
+						</p:commandButton>
 					</div>
 				</div>
 				

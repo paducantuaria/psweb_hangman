@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import psweb.hangman.model.Player;
@@ -33,7 +35,7 @@ public class ConfigBean extends _Bean {
 	private Tipo tipo; // Um jogador / dois jogadores
 
 	private int qtdPArtidas;
-
+	
 	//
 	// Campos do Formulário
 	//
@@ -119,16 +121,9 @@ public class ConfigBean extends _Bean {
 		return false;
 	}
 
-	public void setEasyDifficulty() {
-		this.dificuldade = Dificuldade.EASY;
-	}
-
-	public void setNormalDifficulty() {
-		this.dificuldade = Dificuldade.NORMAL;
-	}
-
-	public void setHardDifficulty() {
-		this.dificuldade = Dificuldade.HARD;
+	public void setDifficulty(ActionEvent event) {
+		String difficulty = (String)event.getComponent().getAttributes().get("difficulty");
+		this.dificuldade = Dificuldade.valueOf(difficulty);
 	}
 
 	@Override
