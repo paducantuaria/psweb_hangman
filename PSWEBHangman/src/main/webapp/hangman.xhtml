@@ -52,7 +52,7 @@
 									<span>Chances: <h:outputText value="#{hangmanBean.chances}" /></span>
 								</div>
 							</div>
-							<ui:fragment rendered="#{configBean.twoPlayers}">								
+							<ui:fragment rendered="#{configBean.twoPlaying}">
 								<div class="player ui-g-4">
 									<div class="playername ui-md-6 ui-g-12">
 										<span><h:outputText value="#{configBean.player2.name}" /></span>
@@ -61,7 +61,6 @@
 										<span><h:outputText value="#{configBean.player2.currentScore}" /></span>
 									</div>
 								</div>
-								
 							</ui:fragment>
 												
 						</div>
@@ -88,7 +87,8 @@
 													 icon="ui-icon-arrowrefresh-1-w"
 													 styleClass="iterationButton" 
 									                 actionListener="#{hangmanBean.reset}"
-									                 update="form"/>
+									                 update="form"
+									                 rendered="#{!configBean.twoPlaying}"/>
 									</div>
 									<div class=" ui-md-3 ui-g-12">
 										<p:commandButton
@@ -107,7 +107,7 @@
 									                 actionListener="#{hangmanBean.showHint}"
 									                 disabled="#{hangmanBean.hintDisplayed or hangmanBean.gameOver}"
 									                 update="form"
-									                 rendered="#{!configBean.twoPlayers}"/>
+									                 rendered="#{!configBean.twoPlaying}"/>
 									</div>
 									
 								</div>

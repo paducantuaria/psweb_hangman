@@ -17,21 +17,37 @@
 	<h:body>
 		<h:form id="form">
 			<div class="ui-fluid">
-				<div class="top-config basic-style center-align ui-g">
-					<h:outputText value="#{hangmanBean.gameWin ? 'Congratulations!' : 'You are dead!!!'}" />
+			
+				<div class="top basic-style center-align ui-g">
+					<div class="gametitle ui-g-12">
+						<h:outputText value="#{hangmanBean.gameWin ? 'Congratulations!' : 'You are dead!!!'}" />
+					</div>
 				</div>
-				<div class="basic-style ui-g">
+				
+				<div class="basic-style center-align ui-g">
 					<h:outputText value="#{hangmanBean.gameWin ? 'You hit de word' : 'You missed the word'}" />
 				</div>
-				<div class="top-config basic-style center-align ui-g">
-					<h:outputText value="#{hangmanBean.answer}" />
+				
+				<div class="top basic-style center-align ui-g">
+					<div class="gametitle ui-g-12">
+						<h:outputText value="#{hangmanBean.answer}" />
+					</div>
 				</div>
-				<div class="top-config basic-style center-align ui-g">
+				
+				<div class="navigation basic-style center-align ui-g">
+					
 					<p:commandButton actionListener="#{hangmanBean.reset}"
-					 action="hangman"
-					 ajax="false"
-        			 value="Next"
-        			 styleClass="btn-config" />
+									 action="hangman"
+									 ajax="false"
+				        			 value="Next Play"
+				        			 styleClass="btn-config"
+				        			 rendered="#{!configBean.twoPlaying}" />
+ 					
+ 					<p:commandButton action="typeword"
+									 ajax="false"
+				        			 value="Next Play"
+				        			 styleClass="btn-config"
+				        			 rendered="#{configBean.twoPlaying}" />
 				</div>
 			</div>
 		</h:form>

@@ -35,6 +35,8 @@ public class HangmanBean extends _Bean {
 	private Player currentEnemy;
 	private String currentHint;
 	private boolean isSoundPlaying;
+	private boolean inGame = false;
+	private String wordFromPlayer;
 
 	@Autowired
 	public ConfigBean config;
@@ -56,6 +58,18 @@ public class HangmanBean extends _Bean {
 		return config;
 	}
 	
+	public void configPlayers() {
+		// seta o player1
+		currentPlayer = config.getPlayer1();
+		currentPlayer.setCurrentScore(0);
+		
+		// seta o player2 se for o caso e zera o scores
+		if(config.isTwoPlaying()) {
+			currentEnemy =  config.getPlayer2();
+			currentEnemy.setCurrentScore(0);
+		}
+	}
+	
 	public void setDifficulty(ActionEvent event) {
 		config.setDifficulty(event);
 		firstReset();
@@ -66,17 +80,8 @@ public class HangmanBean extends _Bean {
 	 * 
 	 */
 	public void firstReset() {
-		// seta o player1
-		currentPlayer = config.getPlayer1();
-		currentPlayer.setCurrentScore(0);
-		
-		// seta o player2 se for o caso e zera o scores
-		if(config.isTwoPlayers()) {
-			currentEnemy =  config.getPlayer2();
-			currentEnemy.setCurrentScore(0);
-		}
-		
-		this.isSoundPlaying = true;
+		this.setSoundPlaying(true);
+		this.setInGame(true);
 		
 		// prepara o jogo para iniciar
 		reset();
@@ -87,18 +92,10 @@ public class HangmanBean extends _Bean {
 		hint = "";
 		currentHint = "";
 		
-		if(!config.isTwoPlayers())
+		if(!config.isTwoPlaying())
 			hangman.reset(config.getDificuldade());
 		else
-			resetTwoPlayers();
-	}
-	
-	private void resetTwoPlayers() {
-		// abre modal para currentEnemy digitar palavra
-		String wordFromPlayer = "TESTANDO"; // TODO implementar modal para player digitar a palavra
-		
-		// seta palavra digitada e inicia o jogo
-		hangman.reset(wordFromPlayer);
+			hangman.reset(wordFromPlayer);
 	}
 	
 	private void finishGame() {
@@ -111,7 +108,7 @@ public class HangmanBean extends _Bean {
 		}
 		
 		// se dois jogadores, alterna current player e enemy
-		if(config.isTwoPlayers())
+		if(config.isTwoPlaying())
 			togglePlayers();
 		
 		// redireciona para página de fim de jogo
@@ -141,7 +138,7 @@ public class HangmanBean extends _Bean {
 			return 0;
 		
 		// se não perdeu e jogo está no modo TWOPLAYERS
-		if(config.isTwoPlayers())
+		if(config.isTwoPlaying())
 			return isGameWin() ? 1 : 0;
 		
 		// se não perdeu e jogo está no modo ONEPLAYER
@@ -181,7 +178,7 @@ public class HangmanBean extends _Bean {
 		currentPlayer.setCurrentScore(currentPlayer.getCurrentScore() + score);
 		
 		// se for modo ONEPLAYER, atualiza o score acumulado no banco
-		if(!config.isTwoPlayers()) {
+		if(!config.isTwoPlaying()) {
 			currentPlayer.setScore(currentPlayer.getScore() + score);
 			PlayerServices.insert(currentPlayer);
 		}
@@ -192,11 +189,21 @@ public class HangmanBean extends _Bean {
 	 * 
 	 */
 	private void togglePlayers() {
+		// TODO apagar sysos
+		System.out.print("Player 1: ");
+		System.out.println(config.getPlayer1().getName());
+		System.out.print("Player 2: ");
+		System.out.println(config.getPlayer2().getName());
+		System.out.print("Jogador corrente: ");
+		System.out.println(currentPlayer.getName());
+		
 		if(currentPlayer.equals(config.getPlayer1())) {
+			System.out.println("Jogador corrente == Player1");
 			currentPlayer = config.getPlayer2();
 			currentEnemy = config.getPlayer1();
 		}
 		else {
+			System.out.println("Jogador corrente != Player1");
 			currentPlayer = config.getPlayer1();
 			currentEnemy = config.getPlayer2();
 		}
@@ -211,8 +218,10 @@ public class HangmanBean extends _Bean {
 		char chr = letter.toCharArray()[0];
 		hangman.input(chr);
 		letter = "";
-		if (currentHint != hangman.getTrueHint()) {
-			hint = "";
+		if(!config.isTwoPlaying()) {
+			if (currentHint != hangman.getTrueHint()) {
+				hint = "";
+			}
 		}
 		if(isGameOver())
 			finishGame();
@@ -226,11 +235,12 @@ public class HangmanBean extends _Bean {
 	}
 
 	public void throwHome() {
-		this.isSoundPlaying = true;
+		this.setSoundPlaying(false);
+		this.setInGame(false);
 	}
 
 	public boolean toggleSound() {
-		isSoundPlaying = this.isSoundPlaying ? false : true;
+		this.setSoundPlaying(this.isSoundPlaying ? false : true);
 		return isSoundPlaying;
 	}
 
@@ -290,6 +300,14 @@ public class HangmanBean extends _Bean {
 	public void setCurrentPlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
 	}
+	
+	public Player getCurrentEnemy() {
+		return currentEnemy;
+	}
+
+	public void setCurrentEnemy(Player currentEnemy) {
+		this.currentEnemy = currentEnemy;
+	}
 
 	public String getHint() {
 		return this.hint;
@@ -306,4 +324,25 @@ public class HangmanBean extends _Bean {
 	public boolean isSoundPlaying() {
 		return isSoundPlaying;
 	}
+	
+	public void setSoundPlaying(boolean soundPlaying) {
+		this.isSoundPlaying = soundPlaying;
+	}
+
+	public boolean isInGame() {
+		return inGame;
+	}
+
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
+	}
+
+	public String getWordFromPlayer() {
+		return wordFromPlayer;
+	}
+
+	public void setWordFromPlayer(String wordFromPlayer) {
+		this.wordFromPlayer = wordFromPlayer;
+	}
+	
 }
