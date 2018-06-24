@@ -26,59 +26,35 @@
 				
 				<div class="label-name-player-config basic-style center-align ui-g">
 					<div class="ui-g-12">
-						<span><h:outputText value="Player 1 NAME" /></span>
+						<span><h:outputText value="#{hangmanBean.currentEnemy.name} type word to #{hangmanBean.currentPlayer.name}" /></span>
 					</div>
 				</div>
 				<div class="field-name-player-config basic-style center-align ui-g">
 					<div class="ui-g-12">
 						<p:inputText 
-									value="#{configBean.player1.name}" 
-        	                  		maxlength="10"
+									value="#{hangmanBean.wordFromPlayer}" 
+        	                  		maxlength="15"
         	                  		styleClass="input-config" />
 					</div>
 				</div>
 				
-				<ui:fragment rendered="#{configBean.twoPlaying}">
-					<div class="label-name-player-config basic-style center-align ui-g">
-						<div class="ui-g-12">
-							<span><h:outputText value="Player 2 NAME" /></span>
-						</div>
-					</div>
-					<div class="field-name-player-config basic-style center-align ui-g">
-						<div class="ui-g-12">
-							<p:inputText 
-										value="#{configBean.player2.name}" 
-	        	                  		maxlength="10"
-	        	                  		styleClass="input-config" />
-						</div>
-					</div>
-				</ui:fragment>
-				
 				<div class="navigation basic-style ui-g">
 					<div class="ui-g-4">
-						<p:commandButton action="index"
+						<p:commandButton action="players"
 										 ajax="false"
 					        			 value="Previous"
-					        			 styleClass="btn-config" />
+					        			 styleClass="btn-config"
+					        			 rendered="#{!hangmanBean.inGame}" />
 					</div>
 					<div class="ui-g-4">
 					</div>
 					
 					<div class="ui-g-4 right-align">
-					
-						<p:commandButton actionListener="#{hangmanBean.configPlayers}"
-										 action="typeword"
+						<p:commandButton actionListener="#{hangmanBean.firstReset}"
+										 action="hangman"
 										 ajax="false"
 					        			 value="Next"
-					        			 styleClass="btn-config"
-					        			 rendered="#{configBean.twoPlaying}" />
-					        			 
-						<p:commandButton actionListener="#{hangmanBean.configPlayers}"
-										 action="difficulty"
-										 ajax="false"
-					        			 value="Next"
-					        			 styleClass="btn-config"
-					        			 rendered="#{!(configBean.twoPlaying)}" />
+					        			 styleClass="btn-config" />
 					</div>
 					
 				</div>

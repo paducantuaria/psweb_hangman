@@ -114,7 +114,7 @@ public class ConfigBean extends _Bean {
 		this.player2 = player2;
 	}
 
-	public boolean isTwoPlayers() {
+	public boolean isTwoPlaying() {
 		if (Tipo.TWOPLAYER.equals(this.tipo)) {
 			return true;
 		}
