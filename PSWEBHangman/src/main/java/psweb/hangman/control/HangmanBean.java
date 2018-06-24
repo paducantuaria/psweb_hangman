@@ -363,4 +363,6 @@ public class HangmanBean extends _Bean {
 		this.wordFromPlayer = wordFromPlayer;
 	}
 
+
 }
+
