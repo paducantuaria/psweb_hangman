@@ -23,23 +23,40 @@
 	   									value="images/app/image_game.jpg"/>
 					</div>
 				</div>
-				<div class="players-number-config basic-style center-align ui-g">
+				
+				<div class="label-name-player-config basic-style center-align ui-g">
 					<div class="ui-g-12">
-						<p:commandButton actionListener="#{configBean.setOnePlayer}"
-										 action="players"
-										 ajax="false"
-					        			 value="Forever Alone"
-					        			 styleClass="btn-config" />
+						<span><h:outputText value="#{hangmanBean.currentEnemy.name} type word to #{hangmanBean.currentPlayer.name}" /></span>
 					</div>
 				</div>
-				<div class="players-number-config basic-style center-align ui-g">
+				<div class="field-name-player-config basic-style center-align ui-g">
 					<div class="ui-g-12">
-						<p:commandButton actionListener="#{configBean.setTwoPlayers}"
-										 action="players" 
-										 ajax="false" 
-					        			 value="Against an Enemy"
+						<p:password 
+									value="#{hangmanBean.wordFromPlayer}" 
+        	                  		maxlength="15"
+        	                  		styleClass="input-config" />
+					</div>
+				</div>
+				
+				<div class="navigation basic-style ui-g">
+					<div class="ui-g-4">
+						<p:commandButton action="players"
+										 ajax="false"
+					        			 value="Previous"
+					        			 styleClass="btn-config"
+					        			 rendered="#{!hangmanBean.inGame}" />
+					</div>
+					<div class="ui-g-4">
+					</div>
+					
+					<div class="ui-g-4 right-align">
+						<p:commandButton actionListener="#{hangmanBean.firstReset}"
+										 action="hangman"
+										 ajax="false"
+					        			 value="Next"
 					        			 styleClass="btn-config" />
 					</div>
+					
 				</div>
 			</div>
 		</h:form>

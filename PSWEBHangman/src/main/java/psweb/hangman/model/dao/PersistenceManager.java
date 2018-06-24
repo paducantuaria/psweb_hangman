@@ -29,5 +29,6 @@ public abstract class PersistenceManager {
 	public static EntityTransaction getTransaction(){
 		return manager.getTransaction();
 	}
+	
 
 }

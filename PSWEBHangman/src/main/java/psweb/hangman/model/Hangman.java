@@ -3,7 +3,7 @@ package psweb.hangman.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import psweb.hangman.services.WordServices;
+import psweb.hangman.services.WordServicesStatic;
 import psweb.hangman.utils.enums.Dificuldade;
 
 /**
@@ -19,7 +19,8 @@ public class Hangman {
 	private List<Character> history;
 
 	private Word currentWord;
-
+	
+	
 	public Hangman() {
 		history = new ArrayList<Character>();
 	}
@@ -31,11 +32,25 @@ public class Hangman {
 	 */
 	public void reset() {
 
-		currentWord = WordServices.selectWord();
+		//TODO Remover chamada de serviço em Hangman
+		currentWord = WordServicesStatic.selectWord();
 		chances = 6;
 		history = new ArrayList<Character>();
 	}
 
+	/**
+	 * Reinicia o jogo com a palavra retirada do banco
+	 * 
+	 * @param palavra retirada do banco
+	 * @since 1.0
+	 */
+	public void reset(Word word) {
+
+		currentWord = word;
+		chances = 6;
+		history = new ArrayList<Character>();
+	}
+	
 	/**
 	 * Reinicia o jogo e sorteia uma nova palavra dentro da dificuldade escolhida
 	 * 
@@ -45,10 +60,10 @@ public class Hangman {
 	 */
 	public void reset(Dificuldade dificuldade) {
 
-		currentWord = WordServices.selectWord(dificuldade);
+		currentWord = WordServicesStatic.selectWord(dificuldade);
 		chances = 6;
 		history = new ArrayList<Character>();
-	}
+}
 
 	/**
 	 * Reinicia o jogo com uma palavra escolhida
@@ -68,8 +83,7 @@ public class Hangman {
 	/**
 	 * Reinicia o jogo com uma palavra escolhida
 	 * 
-	 * @param forcedWord
-	 *            palavra que será utilizada no construtor
+	 * @param forcedWord palavra que será utilizada no construtor
 	 */
 	public void reset(String forcedWord) {
 		currentWord = new Word(forcedWord);
@@ -80,8 +94,7 @@ public class Hangman {
 	/**
 	 * Faz o input de um caractere
 	 * 
-	 * @param chr
-	 *            caractere a ser inserido
+	 * @param chr caractere a ser inserido
 	 * @return retorno do método input de Word em currentWord
 	 */
 	public boolean input(Character chr) {

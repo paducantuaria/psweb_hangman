@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<meta name="viewport" content="width=device-width" />
+		<script src="js/geral.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="themes/config-game.css"></link>
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"></link>
+	</h:head>
+
+	<h:body>
+		<h:form id="form">
+			<div class="ui-fluid">
+			
+				<div class="top basic-style center-align ui-g">
+					<div class="gametitle ui-g-12">
+						<h:outputText value="#{hangmanBean.gameWin ? 'Congratulations!' : 'You are dead!!!'}" />
+					</div>
+				</div>
+				
+				<div class="basic-style center-align ui-g">
+					<h:outputText value="#{hangmanBean.gameWin ? 'You hit de word' : 'You missed the word'}" />
+				</div>
+				
+				<div class="top basic-style center-align ui-g">
+					<div class="gametitle ui-g-12">
+						<h:outputText value="#{hangmanBean.answer}" />
+					</div>
+				</div>
+				
+				<div class="navigation basic-style center-align ui-g">
+					
+					<p:commandButton actionListener="#{hangmanBean.reset}"
+									 action="hangman"
+									 ajax="false"
+				        			 value="Next Play"
+				        			 styleClass="btn-config"
+				        			 rendered="#{!configBean.twoPlaying}" />
+ 					
+ 					<p:commandButton action="typeword"
+									 ajax="false"
+				        			 value="Next Play"
+				        			 styleClass="btn-config"
+				        			 rendered="#{configBean.twoPlaying}" />
+				</div>
+			</div>
+		</h:form>
+	</h:body>
+
+</f:view>
+</html>

@@ -15,14 +15,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 			<property name="javax.persistence.jdbc.password" value="postgres" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 
-			<!-- Propriedades para o HSQLDB 
-			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" /> 
-			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:database/hangman.db;shutdown=true" /> 
-			<property name="javax.persistence.jdbc.user" value="sa" /> 
-			<property name="javax.persistence.jdbc.password" value="" /> 
-			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/> -->
-
-
+		
 
 			<!-- caso a aplicação não funcione, mude o valor para "create" para criar 
 				as tabelas, depois mudar para update 

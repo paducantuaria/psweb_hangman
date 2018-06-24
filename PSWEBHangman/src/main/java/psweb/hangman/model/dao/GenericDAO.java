@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
- * Implementação do padrão DAO 
+ * Implementação do padrão DAO
  * 
  * @author Paulo Cantuária
  * @since 1.0
