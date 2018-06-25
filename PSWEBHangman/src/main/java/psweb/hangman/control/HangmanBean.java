@@ -63,6 +63,9 @@ public class HangmanBean extends _Bean {
 		return config;
 	}
 
+	/**
+	 * Configura os players para o jogo atual
+	 */
 	public void configPlayers() {
 		// seta o player1
 		currentPlayer = config.getPlayer1();
@@ -87,6 +90,11 @@ public class HangmanBean extends _Bean {
 		}
 	}
 
+	/**
+	 * Configura a dificuldade conforme a opção selecioanda pelo usuário
+	 * 
+	 * @param event Evento que captura o parâmetro passado pelo usuário
+	 */
 	public void setDifficulty(ActionEvent event) {
 		config.setDifficulty(event);
 		firstReset();
@@ -104,6 +112,9 @@ public class HangmanBean extends _Bean {
 		reset();
 	}
 
+	/**
+	 * Prepara a tela para início do jogo
+	 */
 	public void reset() {
 		letter = "";
 		hint = "";
@@ -115,14 +126,9 @@ public class HangmanBean extends _Bean {
 			hangman.reset(wordFromPlayer);
 	}
 
-	private void resetTwoPlayers() {
-		// abre modal para currentEnemy digitar palavra
-		String wordFromPlayer = "TESTANDO"; // TODO implementar modal para player digitar a palavra
-
-		// seta palavra digitada e inicia o jogo
-		hangman.reset(wordFromPlayer);
-	}
-
+	/**
+	 * Finaliza o jogo e redireciona para a tela final
+	 */
 	private void finishGame() {
 		// calcula o score obtido pelo jogador
 		int score = computeScore();
@@ -146,7 +152,7 @@ public class HangmanBean extends _Bean {
 		// abre modal de fim de jogo
 		// Map<String,Object> options = new HashMap<String, Object>();
 		// options.put("modal", true);
-		// PrimeFaces.current().dialog.openDynamic("dlgEndGame", options, null);
+		// PrimeFaces.current().dialog.openDynamic("endGame", options, null);
 		// RequestContext.getCurrentInstance().openDialog("dlgEndGame", options, null);
 
 	}
@@ -154,7 +160,7 @@ public class HangmanBean extends _Bean {
 	/**
 	 * Computa o score obtido na rodada
 	 * 
-	 * @return score (int) score obtido na rodada.
+	 * @return score (int) score calculado.
 	 */
 	private int computeScore() {
 		// se perdeu, retorna 0;
@@ -169,6 +175,11 @@ public class HangmanBean extends _Bean {
 		return computeScoreFromDificulty();
 	}
 
+	/**
+	 * Computa o score baseado na dificuldade escolhida e uso da dica
+	 * 
+	 * @return score (int) score calculado.
+	 */
 	private int computeScoreFromDificulty() {
 		int score = 0;
 
@@ -195,8 +206,7 @@ public class HangmanBean extends _Bean {
 	/**
 	 * Atualiza o score do currentPlayer e persiste no banco se for modo ONEPLAYER
 	 * 
-	 * @param score
-	 *            (int) score obtido na rodada.
+	 * @param score (int) score obtido na rodada.
 	 */
 	private void saveScoreToCurrentPlayer(int score) {
 		// atualiza o score atual

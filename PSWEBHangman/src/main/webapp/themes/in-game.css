@@ -63,6 +63,15 @@ body {
 	padding: .2em;
 }
 
+.spotlight{
+	margin: 140px 0;
+}
+
+.btn-config {
+	max-width: 150px;
+	height: 40px;
+}	
+
 @media only screen and (max-width: 600px) {
     .hangman {
         height: 150px;

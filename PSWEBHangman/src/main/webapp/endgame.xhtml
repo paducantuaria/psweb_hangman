@@ -10,7 +10,7 @@
 		<meta name="viewport" content="width=device-width" />
 		<script src="js/geral.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="themes/config-game.css"></link>
+		<link rel="stylesheet" type="text/css" href="themes/in-game.css"></link>
 		<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"></link>
 	</h:head>
 
@@ -25,29 +25,34 @@
 				</div>
 				
 				<div class="basic-style center-align ui-g">
-					<h:outputText value="#{hangmanBean.gameWin ? 'You hit de word' : 'You missed the word'}" />
+					<div class="ui-g-12">
+						<h:outputText value="#{hangmanBean.gameWin ? 'You hit de word' : 'You missed the word'}" />
+					</div>
 				</div>
 				
-				<div class="top basic-style center-align ui-g">
+				<div class="top spotlight basic-style center-align ui-g">
 					<div class="gametitle ui-g-12">
 						<h:outputText value="#{hangmanBean.answer}" />
 					</div>
 				</div>
 				
-				<div class="navigation basic-style center-align ui-g">
-					
-					<p:commandButton actionListener="#{hangmanBean.reset}"
-									 action="hangman"
-									 ajax="false"
-				        			 value="Next Play"
-				        			 styleClass="btn-config"
-				        			 rendered="#{!configBean.twoPlaying}" />
+				<div class="navigation basic-style ui-g">
+					<div class="ui-g-4"></div>
+					<div class="ui-g-4"></div>
+					<div class="ui-g-4 right-align">
+						<p:commandButton actionListener="#{hangmanBean.reset}"
+										 action="hangman"
+										 ajax="false"
+					        			 value="Next Play"
+					        			 styleClass="btn-config"
+					        			 rendered="#{!configBean.twoPlaying}" />
  					
- 					<p:commandButton action="typeword"
-									 ajax="false"
-				        			 value="Next Play"
-				        			 styleClass="btn-config"
-				        			 rendered="#{configBean.twoPlaying}" />
+ 						<p:commandButton action="typeword"
+										 ajax="false"
+					        			 value="Next Play"
+				    	    			 styleClass="btn-config"
+				        				 rendered="#{configBean.twoPlaying}" />
+					</div>
 				</div>
 			</div>
 		</h:form>

@@ -140,7 +140,8 @@
 							</div>
 							<div class="center-align ui-g-2">
 								<p:inputText 
-									value="#{hangmanBean.letter}" 
+									value="#{hangmanBean.letter}"
+									styleClass="iptGuess" 
 	                           		maxlength="1"
 	                           		readonly="#{hangmanBean.gameOver}">
 									<p:ajax event="keyup" update="form" />
@@ -149,7 +150,7 @@
 							<div class="ui-g-5">
 								<p:commandButton  
 									value="Guess"
-									styleClass="half-width" 
+									styleClass="half-width btnGuess" 
 					                actionListener="#{hangmanBean.guess}"
 					                disabled="#{empty hangmanBean.letter or hangmanBean.gameOver}"
 					                update="form" />
